@@ -6,7 +6,7 @@
 /*   By: yumamur <yumamur@student.42.tr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 18:50:59 by yumamur           #+#    #+#             */
-/*   Updated: 2022/12/17 02:19:53 by yumamur          ###   ########.fr       */
+/*   Updated: 2022/12/24 02:27:05 by yumamur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,8 @@
 
 static size_t	ft_arrcount(const char *s, char c)
 {
-	size_t	ctrl;
 	size_t	count;
 
-	ctrl = 0;
 	count = 0;
 	while (*s != '\0')
 	{

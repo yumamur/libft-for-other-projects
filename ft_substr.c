@@ -6,7 +6,7 @@
 /*   By: yumamur <yumamur@student.42.tr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/26 12:01:21 by yumamur           #+#    #+#             */
-/*   Updated: 2022/12/16 19:23:12 by yumamur          ###   ########.fr       */
+/*   Updated: 2022/12/25 00:41:25 by yumamur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,9 @@ char	*ft_substr(const char *s, unsigned int start, size_t len)
 
 	if (s == NULL)
 		return (NULL);
+	if (ft_strlen(s) < len)
+		len = ft_strlen(s);
+	ret = NULL;
 	size = ft_strlen((char *)s);
 	if (start > size)
 		return (ft_strdup(""));
