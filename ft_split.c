@@ -6,7 +6,7 @@
 /*   By: yumamur <yumamur@student.42.tr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 18:50:59 by yumamur           #+#    #+#             */
-/*   Updated: 2022/12/24 02:27:05 by yumamur          ###   ########.fr       */
+/*   Updated: 2022/12/25 01:30:58 by yumamur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static size_t	ft_wordlen(const char *s, char c)
 	return (i);
 }
 
-static char	**ft_f_that_line(const char *s, char c, char **pt, size_t count)
+static char	**ft_splinter(const char *s, char c, char **pt, size_t count)
 {
 	size_t	n;
 
@@ -61,7 +61,7 @@ static char	**ft_f_that_line(const char *s, char c, char **pt, size_t count)
 			if (!pt[n])
 				return (NULL);
 			while (*s != c && *s != '\0')
-				pt[n][count++] = *s++;
+				pt[n][count++] = *(s++);
 			if (*s == '\0')
 				s--;
 			pt[n][count] = '\0';
@@ -83,6 +83,8 @@ char	**ft_split(const char *s, char c)
 	if (!s || s[0] == 0)
 	{
 		pt = ft_calloc(1, sizeof(char *));
+		if (!pt)
+			return (NULL);
 		pt[0] = NULL;
 		return (pt);
 	}
@@ -92,6 +94,6 @@ char	**ft_split(const char *s, char c)
 	pt = (char **)malloc((count + 1) * sizeof(s));
 	if (!pt)
 		return (NULL);
-	ft_f_that_line(s, c, pt, count);
+	ft_splinter(s, c, pt, count);
 	return (pt);
 }

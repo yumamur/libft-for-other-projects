@@ -6,7 +6,7 @@
 /*   By: yumamur <yumamur@student.42.tr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 18:40:27 by yumamur           #+#    #+#             */
-/*   Updated: 2022/12/24 23:46:24 by yumamur          ###   ########.fr       */
+/*   Updated: 2022/12/25 02:00:22 by yumamur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,12 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 	while (lst)
 	{
 		new = ft_lstnew((*f)(lst->content));
+		ft_lstadd_back(&head, new);
 		if (!(new))
 		{
 			ft_lstclear(&head, del);
 			return (NULL);
 		}
-		ft_lstadd_back(&head, new);
 		lst = lst->next;
 	}
 	return (head);
