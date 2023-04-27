@@ -1,96 +1,71 @@
 NAME = libft.a
 
+DIR_SRC = ./src
+DIR_OBJ = ./obj
+SUBDIR_SRC = $(wildcard $(DIR_SRC)/*)
+SUBDIR_OBJ = $(subst $(DIR_SRC),$(DIR_OBJ),$(SUBDIR_SRC))
+SRC = $(filter %.c,$(shell find $(DIR_SRC)))
+OBJ = $(subst $(DIR_SRC),$(DIR_OBJ),$(SRC:.c=.o))
+INCLUDE = -I ./include
+
+ARCH	= /bin/ar
+RM		= /bin/rm
+CC		= /bin/clang
 CFLAGS	= -Wall -Werror -Wextra
 
-CC	= gcc
+OBJ_DIRS_FLAG		= .obj_dirs_created
+NAME_UPDATE_FLAG	= .name_is_up_to_date
 
-SRCS    = ft_atoi.c \
-		ft_bzero.c \
-		ft_calloc.c \
-		ft_isalnum.c \
-		ft_isalpha.c \
-		ft_isascii.c \
-		ft_isdigit.c \
-		ft_isprint.c \
-		ft_itoa.c \
-		ft_memchr.c \
-		ft_memcmp.c \
-		ft_memcpy.c \
-		ft_memmove.c \
-		ft_memset.c \
-		ft_putchar_fd.c \
-		ft_putendl_fd.c \
-		ft_putnbr_fd.c \
-		ft_putstr.c \
-		ft_putstr_fd.c \
-		ft_split.c \
-		ft_strchr.c \
-		ft_strcmp.c \
-		ft_strdup.c \
-		ft_striteri.c \
-		ft_strjoin.c \
-		ft_strlcat.c \
-		ft_strlcpy.c \
-		ft_strlen.c \
-		ft_strmapi.c \
-		ft_strncmp.c \
-		ft_strnstr.c \
-		ft_strrchr.c \
-		ft_substr.c \
-		ft_strtrim.c \
-		ft_tolower.c \
-		ft_toupper.c
+$(NAME): $(OBJ) | $(NAME_UPDATE_FLAG)
+	@if [ -e $(NAME) ] && [ $(NAME_UPDATE_FLAG) -nt $(NAME) ]; then \
+		printf "\033[KEverything is up-to-date.\n"; \
+	else \
+		$(ARCH) -rcs $(NAME) $(OBJ); \
+		ranlib $(NAME); \
+		touch $(NAME_UPDATE_FLAG); \
+	fi
 
-BSRCS	= ft_lstdelone_bonus.c \
-		ft_lstmap_bonus.c \
-		ft_lstclear_bonus.c \
-		ft_lstlast_bonus.c \
-		ft_lstiter_bonus.c \
-		ft_lstnew_bonus.c \
-		ft_lstsize_bonus.c \
-		ft_lstadd_back_bonus.c \
-		ft_lstadd_front_bonus.c
+$(OBJ): $(SRC) | $(OBJ_DIRS_FLAG)
+	@if [ -e $(NAME) ] && [ $(NAME_UPDATE_FLAG) -nt $(NAME) ]; then \
+		for c in $(SRC); do \
+			if [ "$$c" -ot "$(NAME)" ]; then \
+				continue; \
+			else \
+				printf "There is an update in \033[38;2;240;20;20;1m%s\033[m, rebuilding.\n" $$c; \
+				make --silent re; \
+				break; \
+			fi; \
+		done; \
+	else \
+		printf "\033[38;2;40;240;60;48;2;20;20;20;1m\033[M  [LIBFT]\n"; \
+		n=0; \
+		for f in $(SRC); do \
+			obj="$$(echo $$f | sed 's|$(DIR_SRC)|$(DIR_OBJ)|;s|\.c|\.o|')"; \
+			if [ "$$obj" -nt "$$f" ] && [ "$$obj" -nt "$(NAME)" ]; then \
+				continue; \
+			fi; \
+			$(CC) $(CFLAGS) $(INCLUDE) -c "$$f" -o "$$obj"; \
+			n=$$(($$n+1)); \
+			printf "\r\tCompiled files: $$n\033[K"; \
+		done; \
+		printf "\n\tDone compiling.\n\033[m"; \
+	fi
 
-OBJS 	= $(SRCS:%.c=%.o)
-BOBJS	= $(BSRCS:%.c=%.o)
+$(OBJ_DIRS_FLAG):
+	@mkdir -p $(DIR_OBJ) $(SUBDIR_OBJ)
+	@touch $(OBJ_DIRS_FLAG)
 
-all:	$(NAME)
-$(NAME):	$(OBJS)
-	ar -rcs $(NAME) $(OBJS)
-	@echo "⠀⠀⠀⠀⠀⠀⠀⠀⠊⠀⠉⠁⠀⠀⠈⠉⠉⠉⠓⠂⢤⣄⡀⠀⠀⠀⠀⠀⠀⠀⠐⠚⠙⠲⣤⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀"
-	@echo "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡠⠄⠀⠀⠀⠤⢄⠀⠀⠀⠙⠀⠢⡐⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠓⠦⡤⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀"
-	@echo "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠳⢦⣻⣀⣀⣀⡤⠤⠤⠤⠤⠤⢄⠀⠀⠀⢹⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀"
-	@echo "⠀⠀⠀⢀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣠⣤⣤⠤⠤⠤⠤⠤⠬⢽⣯⣵⣄⠀⠀⠀⠀⠀⠀⠈⠉⠉⠙⠾⠷⠦⡄⠀⠀⠀⠀⠀⠀⠀"
-	@echo "⠀⠀⠀⢸⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⠞⠉⠀⣀⣀⣀⣀⣀⣀⣀⣀⠀⠀⠀⠘⢧⠀⠀⠀⢀⣤⣤⣤⠤⠤⠤⠤⢤⣠⣀⡀⠀⠐⡄⠀⠀"
-	@echo "⠀⠀⢀⠼⠀⠀⠀⠀⠀⠀⢀⡤⠞⠁⢀⡴⠋⠉⠀⠀⠀⠈⠉⠉⠉⠉⠙⠳⣤⡘⣧⣤⠴⠋⠀⣀⣤⣤⡤⠤⢤⣤⣀⣈⣉⠉⠉⠑⠒⢦"
-	@echo "⠀⠀⠀⡇⠀⠀⠀⠀⠀⠰⠋⠀⣠⠶⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⠟⢀⣀⡴⠚⠉⠀⠀⠀⠀⠀⠀⠀⠀⠈⠉⠛⠲⢤⣈"
-	@echo "⠀⠀⠀⠇⠀⠀⠀⢠⣴⠶⡶⠛⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣠⣤⣤⣤⡤⠤⠤⠤⢿⡅⠀⠀⣀⣀⣠⣤⣤⣤⣶⡶⠶⠶⠶⠶⠤⢤⣄"
-	@echo "⠀⠀⠀⠀⠀⠀⠀⠈⠷⣄⡀⠀⠀⠀⠀⠀⠀⣀⡤⢶⣾⣿⣽⣥⣤⣤⣀⡀⠀⠀⠀⠀⢻⠖⠋⠉⠁⢠⣿⣿⣿⣿⣿⣿⣶⣤⡀⠀⠀⠈"
-	@echo "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠉⠳⣤⠤⠴⠖⠚⠁⢠⣿⣏⣹⣿⣿⣿⣿⣿⣿⣦⠀⠀⢀⡟⠀⠀⠀⢀⣿⣿⣏⣹⣿⣿⣿⣿⣿⣿⣦⠀⠀"
-	@echo "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⢦⠀⠀⠀⠀⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣧⠀⣼⠁⠀⠀⠀⣸⣿⣿⣿⣿⣿⡟⢻⣿⣿⣿⣿⠀⠀"
-	@echo "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡀⠈⠓⢦⡀⠀⣿⣿⣿⣿⣿⣿⣀⣸⣿⣿⣿⡿⠋⢹⡗⠦⣤⣀⣻⣿⣿⣿⣽⣿⣷⣾⣿⣿⣿⣿⠴⢒"
-	@echo "⠄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠳⣄⡀⠀⠙⠶⠿⠿⠿⠿⠾⠿⠿⠿⠿⠟⠋⢀⣠⡟⠀⠀⠀⠀⠙⠛⠛⠛⠛⠛⠉⠉⠉⠁⠀⠀⢀⣾"
-	@echo "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠉⠓⠶⠦⠄⠀⠀⠠⠀⠀⠄⠠⠀⣤⠶⠋⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⡾⠁"
-	@echo "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡴⠃⠈⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠠⠤⠤⠤⠤⠴⠶⣶⣶⣶⠶⠛⠀⠐"
-	@echo "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣤⡤⠶⠛⠉⠛⠶⢤⣄⣀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠉⣹⡿⠿⢺⣖"
-	@echo "⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⠞⠉⠀⠀⠀⠀⠀⠀⠀⠀⠈⠉⠙⠦⣤⣀⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⡴⠛⠁⠀⠀⠘⣿"
-	@echo "⠀⠀⠀⠀⠀⠀⠀⠀⣰⠏⠀⠀⠀⠀⠀⠀⢀⣤⡀⠀⠀⠀⠀⠀⠀⠈⠉⠙⠛⠒⠒⠒⠒⠒⠒⠒⠶⠲⠒⠒⠚⠋⠁⠀⠀⠀⠀⠀⣸⡟"
-	@echo "⠀⠀⠀⠀⠀⠀⠀⢰⡏⠀⠀⠀⠀⠀⠀⠀⠈⠀⠉⠛⠶⠦⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣤⡤⠾⠟⠀"
-	@echo "⠀⠀⠀⠀⠀⠀⠀⠘⢧⣤⣀⣠⡄⠀⠀⠀⠀⡀⠀⠀⠀⠀⠈⠛⠓⠲⠶⠶⠶⠶⠶⠦⠤⠤⠤⠤⠶⠶⠶⠶⠶⠖⠚⠛⢻⣿⠀⠀⠀⠀"
-	@echo "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠉⠙⠓⠶⠶⠶⠶⠶⠶⠶⠶⠶⠦⢤⣤⣤⣤⣤⣤⣤⣤⣤⡤⠞⠋⠉⠀⠀⠀⠀"
-	@echo "⠀⠀⠀⠀⠀⢠⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⣤⠴⠶⠶⠛⠛⠉⠉⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀"
-	@echo "⢷⣤⣄⠀⠀⠲⠿⣤⣀⣀⣀⣀⢀⢀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣠⣶⡿⣿⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀"
-	@echo "⠀⠀⠉⠻⣦⣀⣀⠀⠈⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⣉⣡⡶⠟⠁⠀⢿⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀"
-	@echo "⣤⣤⣤⣤⣤⣭⣽⣿⣿⣿⣿⣿⣿⣷⣶⣶⣶⣶⣶⣶⣶⣾⣿⣿⣯⣥⣤⣶⣤⣤⣼⣗⣒⣒⣶⣦⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀ "
-bonus: $(OBJS) $(BOBJS)
-	ar -rcs $(NAME) $(OBJS) $(BOBJS)
+$(NAME_UPDATE_FLAG):
+	@touch $(NAME_UPDATE_FLAG)
+
+.PHONY: all clean fclean re
+
+all: $(NAME)
 
 clean:
-	rm -rf $(OBJS) $(BOBJS)
+	@$(RM) -rf $(OBJ) $(DIR_OBJ)
 
 fclean: clean
-	rm -f $(NAME)
+	@$(RM) -rf $(NAME) $(OBJ_DIRS_FLAG) $(NAME_UPDATE_FLAG)
 
-re:	fclean all
-
-.PHONY:	all clean fclean re bonus
+re: fclean all
