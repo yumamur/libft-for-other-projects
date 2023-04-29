@@ -18,7 +18,7 @@ NAME_UPDATE_FLAG	= .name_is_up_to_date
 
 $(NAME): $(OBJ) | $(NAME_UPDATE_FLAG)
 	@if [ -e $(NAME) ] && [ $(NAME_UPDATE_FLAG) -nt $(NAME) ]; then \
-		printf "\033[KEverything is up-to-date.\n"; \
+		printf "\033[Kmake: 'libft.a' is up to date.\n"; \
 	else \
 		$(ARCH) -rcs $(NAME) $(OBJ); \
 		ranlib $(NAME); \
@@ -31,7 +31,7 @@ $(OBJ): $(SRC) | $(OBJ_DIRS_FLAG)
 			if [ "$$c" -ot "$(NAME)" ]; then \
 				continue; \
 			else \
-				printf "There is an update in \033[38;2;240;20;20;1m%s\033[m, rebuilding.\n" $$c; \
+				printf "There is an update in \033[38;2;240;20;20;1m%s\033[m, rebuilding.\n" `echo $$c | cut -d/ -f3-4`; \
 				make --silent re; \
 				break; \
 			fi; \
@@ -41,12 +41,9 @@ $(OBJ): $(SRC) | $(OBJ_DIRS_FLAG)
 		n=0; \
 		for f in $(SRC); do \
 			obj="$$(echo $$f | sed 's|$(DIR_SRC)|$(DIR_OBJ)|;s|\.c|\.o|')"; \
-			if [ "$$obj" -nt "$$f" ] && [ "$$obj" -nt "$(NAME)" ]; then \
-				continue; \
-			fi; \
 			$(CC) $(CFLAGS) $(INCLUDE) -c "$$f" -o "$$obj"; \
 			n=$$(($$n+1)); \
-			printf "\r\tCompiled files: $$n\033[K"; \
+			printf "\tCompiled files: $$n\033[K\r"; \
 		done; \
 		printf "\n\tDone compiling.\n\033[m"; \
 	fi
