@@ -6,11 +6,11 @@
 /*   By: yusuf <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 19:33:01 by yusuf             #+#    #+#             */
-/*   Updated: 2023/04/27 19:34:35 by yusuf            ###   ########.fr       */
+/*   Updated: 2023/04/30 23:18:33 by yusuf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/libft.h"
+#include "libft.h"
 
 t_list	*ft_lstfirst(t_list *lst)
 {

@@ -6,11 +6,11 @@
 /*   By: yumamur <yumamur@student.42.tr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 19:33:28 by yumamur           #+#    #+#             */
-/*   Updated: 2023/04/12 19:33:24 by yusuf            ###   ########.fr       */
+/*   Updated: 2023/04/30 23:23:34 by yusuf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/libft.h"
+#include "libft.h"
 
 void	ft_bzero(void *s, size_t n)
 {

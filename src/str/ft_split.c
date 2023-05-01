@@ -6,68 +6,68 @@
 /*   By: yumamur <yumamur@student.42.tr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/27 18:50:59 by yumamur           #+#    #+#             */
-/*   Updated: 2023/04/12 16:52:11 by yusuf            ###   ########.fr       */
+/*   Updated: 2023/04/30 23:48:43 by yusuf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/libft.h"
 
-static size_t	ft_arrcount(const char *s, char c)
+static size_t	ft_arrcount(const char *str, char c)
 {
 	size_t	count;
 
 	count = 0;
-	while (*s != '\0')
+	while (*str != '\0')
 	{
-		if (*s == c)
-			s++;
+		if (*str == c)
+			str++;
 		else
 		{
 			count++;
-			while (*s != c && *s != '\0')
-				s++;
+			while (*str != c && *str != '\0')
+				str++;
 		}
 	}
 	return (count);
 }
 
-static size_t	ft_wordlen(const char *s, char c)
+static size_t	ft_wordlen(const char *str, char c)
 {
 	size_t	i;
 
 	i = 0;
-	while (*s != '\0')
+	while (*str != '\0')
 	{
-		if (*s == c && *(s - 1) != c)
+		if (*str == c && *(str - 1) != c)
 			break ;
-		if (*s != c)
+		if (*str != c)
 			i++;
-		s++;
+		str++;
 	}
 	return (i);
 }
 
-static char	**ft_splinter(const char *s, char c, char **pt, size_t count)
+static char	**ft_splinter(const char *str, char c, char **pt, size_t count)
 {
 	size_t	n;
 
 	n = 0;
 	if (count != 0)
 	{
-		while (*s != '\0')
+		while (*str != '\0')
 		{
 			count = 0;
-			pt[n] = (char *)malloc((ft_wordlen(s, c) + 1) * sizeof(*s));
+			pt[n] = malloc(ft_wordlen(str, c) + 1);
 			if (!pt[n])
 				return (NULL);
-			while (*s != c && *s != '\0')
-				pt[n][count++] = *(s++);
-			if (*s == '\0')
-				s--;
+			while (*str != c && *str != '\0')
+				pt[n][count++] = *(str++);
+			if (*str == '\0')
+				str--;
 			pt[n][count] = '\0';
-			s++;
-			while (*s == c && *s != '\0')
-				s++;
+			str++;
+			while (*str == c && *str != '\0')
+				str++;
 			n++;
 		}
 	}
@@ -75,25 +75,25 @@ static char	**ft_splinter(const char *s, char c, char **pt, size_t count)
 	return (pt);
 }
 
-char	**ft_split(const char *s, char c)
+char	**ft_split(const char *str, char c)
 {
 	size_t	count;
 	char	**pt;
 
-	if (!s || s[0] == 0)
+	if (!str || str[0] == 0)
 	{
-		pt = ft_calloc(1, sizeof(char *));
+		pt = ft_calloc(1, 1);
 		if (!pt)
 			return (NULL);
 		pt[0] = NULL;
 		return (pt);
 	}
-	while (*s == c)
-		s++;
-	count = ft_arrcount(s, c);
-	pt = (char **)malloc((count + 1) * sizeof(s));
+	while (*str == c)
+		str++;
+	count = ft_arrcount(str, c);
+	pt = malloc((count + 1) * 8);
 	if (!pt)
 		return (NULL);
-	ft_splinter(s, c, pt, count);
+	ft_splinter(str, c, pt, count);
 	return (pt);
 }

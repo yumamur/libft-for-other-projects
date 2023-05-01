@@ -6,11 +6,9 @@
 /*   By: yumamur <yumamur@student.42.tr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 18:02:43 by yumamur           #+#    #+#             */
-/*   Updated: 2023/04/12 19:30:40 by yusuf            ###   ########.fr       */
+/*   Updated: 2023/04/30 23:25:36 by yusuf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include "../../include/libft.h"
 
 int	ft_isascii(int c)
 {

@@ -6,22 +6,15 @@
 /*   By: yumamur <yumamur@student.42.tr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 19:43:19 by yumamur           #+#    #+#             */
-/*   Updated: 2023/04/12 19:34:45 by yusuf            ###   ########.fr       */
+/*   Updated: 2023/04/30 23:44:53 by yusuf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/libft.h"
+#include "libft.h"
 
-void	ft_putstr_fd(char *s, int fd)
+void	ft_putstr_fd(char *str, int fd)
 {
-	size_t	i;
-
-	if (!s)
+	if (!str)
 		return ;
-	i = 0;
-	while (s[i] != '\0')
-	{
-		ft_putchar_fd(s[i], fd);
-		i++;
-	}
+	write(fd, str, ft_strlen(str));
 }

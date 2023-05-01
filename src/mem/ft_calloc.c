@@ -6,11 +6,11 @@
 /*   By: yumamur <yumamur@student.42.tr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 16:57:07 by yumamur           #+#    #+#             */
-/*   Updated: 2023/04/12 16:51:00 by yusuf            ###   ########.fr       */
+/*   Updated: 2023/04/30 23:38:51 by yusuf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/libft.h"
+#include "libft.h"
 
 void	*ft_calloc(size_t count, size_t size)
 {

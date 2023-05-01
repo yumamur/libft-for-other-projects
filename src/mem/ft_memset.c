@@ -6,11 +6,11 @@
 /*   By: yumamur <yumamur@student.42.tr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 19:32:41 by yumamur           #+#    #+#             */
-/*   Updated: 2023/04/12 19:34:07 by yusuf            ###   ########.fr       */
+/*   Updated: 2023/04/30 23:49:58 by yusuf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/libft.h"
+#include "libft.h"
 
 void	*ft_memset(void *s, int c, size_t n)
 {

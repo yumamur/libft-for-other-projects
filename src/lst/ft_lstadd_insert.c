@@ -6,11 +6,11 @@
 /*   By: yusuf <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 19:22:45 by yusuf             #+#    #+#             */
-/*   Updated: 2023/04/16 18:23:36 by yusuf            ###   ########.fr       */
+/*   Updated: 2023/04/30 23:16:46 by yusuf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/libft.h"
+#include "libft.h"
 
 void	ft_lstadd_insert(t_list **lst, t_list *new)
 {

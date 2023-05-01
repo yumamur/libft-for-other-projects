@@ -37,7 +37,7 @@ $(OBJ): $(SRC) | $(OBJ_DIRS_FLAG)
 			fi; \
 		done; \
 	else \
-		printf "\033[38;2;40;240;60;48;2;20;20;20;1m\033[M  [LIBFT]\n"; \
+		printf "\033[38;2;40;240;60;1m\033[M  [LIBFT]\n"; \
 		n=0; \
 		for f in $(SRC); do \
 			obj="$$(echo $$f | sed 's|$(DIR_SRC)|$(DIR_OBJ)|;s|\.c|\.o|')"; \

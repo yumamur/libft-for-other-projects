@@ -6,11 +6,11 @@
 /*   By: yumamur <yumamur@student.42.tr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 05:54:28 by yumamur           #+#    #+#             */
-/*   Updated: 2023/04/12 19:31:44 by yusuf            ###   ########.fr       */
+/*   Updated: 2023/04/30 23:17:09 by yusuf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/libft.h"
+#include "libft.h"
 
 void	ft_lstclear(t_list **lst, void (*del)(void *))
 {

@@ -6,11 +6,11 @@
 /*   By: yumamur <yumamur@student.42.tr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 19:41:47 by yumamur           #+#    #+#             */
-/*   Updated: 2023/04/12 19:34:21 by yusuf            ###   ########.fr       */
+/*   Updated: 2023/04/30 23:39:49 by yusuf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/libft.h"
+#include "libft.h"
 
 void	ft_putchar_fd(char c, int fd)
 {

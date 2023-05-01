@@ -6,11 +6,11 @@
 /*   By: yumamur <yumamur@student.42.tr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 21:48:14 by yumamur           #+#    #+#             */
-/*   Updated: 2023/04/12 19:34:32 by yusuf            ###   ########.fr       */
+/*   Updated: 2023/04/30 23:42:17 by yusuf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/libft.h"
+#include "libft.h"
 
 void	ft_putnbr_fd(int n, int fd)
 {

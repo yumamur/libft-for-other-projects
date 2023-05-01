@@ -6,11 +6,9 @@
 /*   By: yumamur <yumamur@student.42.tr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 19:28:41 by yumamur           #+#    #+#             */
-/*   Updated: 2023/04/12 19:29:33 by yusuf            ###   ########.fr       */
+/*   Updated: 2023/04/30 23:24:02 by yusuf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include "../../include/libft.h"
 
 int	ft_atoi(const char *str)
 {

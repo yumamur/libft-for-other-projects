@@ -6,11 +6,9 @@
 /*   By: yumamur <yumamur@student.42.tr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 18:01:05 by yumamur           #+#    #+#             */
-/*   Updated: 2023/04/12 19:30:55 by yusuf            ###   ########.fr       */
+/*   Updated: 2023/04/30 23:38:02 by yusuf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include "../../include/libft.h"
 
 int	ft_isdigit(int c)
 {

@@ -6,11 +6,11 @@
 /*   By: yumamur <yumamur@student.42.tr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/28 19:30:03 by yumamur           #+#    #+#             */
-/*   Updated: 2023/04/12 16:51:35 by yusuf            ###   ########.fr       */
+/*   Updated: 2023/04/30 23:24:59 by yusuf            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/libft.h"
+#include "libft.h"
 
 static size_t	ft_zerosaver(int n)
 {
@@ -37,7 +37,7 @@ char	*ft_itoa(int n)
 	d = ft_digitcount(x);
 	if (n < 0)
 		d += 1;
-	pt = (char *)malloc((d + 1) * sizeof(char));
+	pt = malloc(d + 1);
 	if (!pt)
 		return (NULL);
 	if (n < 0)
