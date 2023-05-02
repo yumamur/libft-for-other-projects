@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putmem_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yusuf <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: yumamur <yumamur@student.42istanbul.com.t  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/30 21:22:37 by yusuf             #+#    #+#             */
-/*   Updated: 2023/05/01 20:13:45 by yusuf            ###   ########.fr       */
+/*   Created: 2023/05/01 23:01:20 by yumamur           #+#    #+#             */
+/*   Updated: 2023/05/01 23:01:23 by yumamur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 /*	Print 'n' bytes in binary to given fd, seperated by given 'sep'. Prints
  *	a single line, if no 'sep' is given.
  */
-void	ft_putmem_fd(int fd, size_t n, void *mem, const char *sep)
+void	ft_putmem_fd(int fd, void *mem, size_t n, const char *sep)
 {
-	unsigned char	tmp;
-	size_t			i;
 	int				shift;
+	size_t			i;
+	unsigned char	tmp;
 
 	i = 0;
 	while (i < n)

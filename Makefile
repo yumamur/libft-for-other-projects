@@ -8,7 +8,6 @@ SRC = $(filter %.c,$(shell find $(DIR_SRC)))
 OBJ = $(subst $(DIR_SRC),$(DIR_OBJ),$(SRC:.c=.o))
 INCLUDE = -I ./include
 
-ARCH	= /bin/ar
 RM		= /bin/rm
 CC		= /bin/clang
 CFLAGS	= -Wall -Werror -Wextra
@@ -20,8 +19,7 @@ $(NAME): $(OBJ) | $(NAME_UPDATE_FLAG)
 	@if [ -e $(NAME) ] && [ $(NAME_UPDATE_FLAG) -nt $(NAME) ]; then \
 		printf "\033[Kmake: 'libft.a' is up to date.\n"; \
 	else \
-		$(ARCH) -rcs $(NAME) $(OBJ); \
-		ranlib $(NAME); \
+		$(call archive); \
 		touch $(NAME_UPDATE_FLAG); \
 	fi
 
@@ -55,10 +53,17 @@ $(OBJ_DIRS_FLAG):
 $(NAME_UPDATE_FLAG):
 	@touch $(NAME_UPDATE_FLAG)
 
-.PHONY: all clean fclean re
+.PHONY: archive all clean fclean re
+
+
+archive	= /bin/ar -rcs $(NAME) $(OBJ); \
+		  /bin/ranlib $(NAME)
+
 
 all: $(NAME)
 
+archive	= /bin/ar -rcs $(NAME) $(OBJ); \
+		  /bin/ranlib $(NAME)
 clean:
 	@$(RM) -rf $(OBJ) $(DIR_OBJ)
 

@@ -6,7 +6,7 @@
 /*   By: yumamur <yumamur@student.42.tr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 17:20:44 by yumamur           #+#    #+#             */
-/*   Updated: 2023/04/30 23:46:19 by yusuf            ###   ########.fr       */
+/*   Updated: 2023/05/02 00:03:40 by yumamur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,12 +64,12 @@ char		*ft_substr(const char *str, unsigned int start, size_t len);
 char		**ft_split(const char *str, char c);
 
 /* PRINT */
-void		ft_putchar_fd(char c, int fd);
 void		ft_putstr(char *str);
-void		ft_putstr_fd(char *str, int fd);
-void		ft_putendl_fd(char *str, int fd);
-void		ft_putnbr_fd(int n, int fd);
-void		ft_putmem_fd(int fd, size_t n, void *mem, const char *sep);
+void		ft_putchar_fd(int fd, char c);
+void		ft_putstr_fd(int fd, char *str);
+void		ft_putendl_fd(int fd, char *str);
+void		ft_putnbr_fd(int fd, int n);
+void		ft_putmem_fd(int fd, void *mem, size_t n, const char *sep);
 
 /* LIST */
 int			ft_lstsize(t_list *lst);
@@ -87,4 +87,5 @@ t_list		*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 
 /* UTILS */
 const char	*ft_getenv(const char *envp[], const char *name);
+void		ft_freesplit(char *arr[]);
 #endif
