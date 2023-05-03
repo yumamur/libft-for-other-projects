@@ -24,7 +24,7 @@ static const char	*ft_getenv_2(const char *envp[], const char *name)
 	len = ft_strlen(name);
 	while (*ptenv)
 	{
-		ptenv_start = *((unsigned short *)*ptenv);
+		ptenv_start = ((*ptenv)[0] * 256) + (*ptenv)[1];
 		if (ptenv_start == name_start && (*ptenv)[len] == '='
 			&& !ft_strncmp(*ptenv + 2, name + 2, len - 2))
 			return (&(*ptenv)[len + 1]);

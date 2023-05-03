@@ -17,7 +17,12 @@ NAME_UPDATE_FLAG	= .name_is_up_to_date
 
 $(NAME): $(OBJ) | $(NAME_UPDATE_FLAG)
 	@if [ -e $(NAME) ] && [ $(NAME_UPDATE_FLAG) -nt $(NAME) ]; then \
-		printf "\033[Kmake: 'libft.a' is up to date.\n"; \
+		if [ -e .rebuild ]; then \
+			printf "\t\033[38;2;40;240;60;1mDone rebuilding.\033[m"; \
+			rm -rf .rebuild; \
+		else \
+			printf "\033[Kmake: 'libft.a' is up to date.\n"; \
+		fi; \
 	else \
 		$(call archive); \
 		touch $(NAME_UPDATE_FLAG); \
@@ -30,6 +35,7 @@ $(OBJ): $(SRC) | $(OBJ_DIRS_FLAG)
 				continue; \
 			else \
 				printf "There is an update in \033[38;2;240;20;20;1m%s\033[m, rebuilding.\n" `echo $$c | cut -d/ -f3-4`; \
+				touch .rebuild; \
 				make --silent re; \
 				break; \
 			fi; \
