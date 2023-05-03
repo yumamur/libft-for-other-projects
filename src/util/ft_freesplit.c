@@ -6,7 +6,7 @@
 /*   By: yumamur <yumamur@student.42istanbul.com.t  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 16:34:24 by yumamur           #+#    #+#             */
-/*   Updated: 2023/05/02 18:16:43 by yumamur          ###   ########.fr       */
+/*   Updated: 2023/05/03 15:52:34 by yumamur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,11 @@
 
 void	ft_freesplit(char *arr[])
 {
-	char	*pt;
+	int	i;
 
-	pt = *arr;
-	while (pt)
-	{
-		free(pt);
-		pt++;
-	}
+	i = -1;
+	while (arr[++i])
+		free(arr[i]);
 	free(arr);
 	arr = NULL;
 }
