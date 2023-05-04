@@ -6,7 +6,7 @@
 /*   By: yumamur <yumamur@student.42istanbul.com.t  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 23:03:22 by yumamur           #+#    #+#             */
-/*   Updated: 2023/05/01 23:03:23 by yumamur          ###   ########.fr       */
+/*   Updated: 2023/05/04 17:06:15 by yumamur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,8 @@ char	*ft_strtrim(const char *s1, const char *set)
 	if (!pt)
 		return (NULL);
 	pt[--size] = '\0';
-	while (size > 0)
-	{
-		size--;
+	while (size-- > 0)
 		pt[size] = s1[size];
-	}
 	pt[0] = s1[0];
 	return (pt);
 }
