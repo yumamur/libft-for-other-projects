@@ -1,5 +1,57 @@
 NAME = libft.a
 
+##############
+##          ##
+#   COLOUR   #
+##          ##
+##############
+
+BOLD		= \033[1m
+FG_RED		= \033[38;2;250;0;20m
+FG_GREEN	= \033[38;2;20;250;0m
+FG_BLUE		= \033[38;2;0;80;250m
+FG_PURPLE	= \033[38;2;200;10;200m
+FG_YELLOW	= \033[38;2;10;240;240m
+FG_ORANGE	= \033[38;2;255;150;0m
+BG_RED		= \033[38;2;250;0;20m
+BG_GREEN	= \033[38;2;20;250;0m
+BG_BLUE		= \033[38;2;0;80;250m
+BG_PURPLE	= \033[38;2;200;10;200m
+BG_YELLOW	= \033[38;2;10;240;240m
+BG_ORANGE	= \033[38;2;255;150;0m
+CL_END		= \033[m
+
+
+##############
+##          ##
+#   BINARY   #
+##          ##
+##############
+
+RM		= /usr/bin/rm -rf
+archive	= /usr/bin/ar -rcs $(NAME) $(OBJ); \
+		  /usr/bin/ranlib $(NAME)
+
+CC		= /usr/bin/clang
+CFLAGS	= -Wall -Werror -Wextra -fsanitize=address
+
+
+#############
+##         ##
+#   FLAGS   #
+##         ##
+#############
+
+OBJ_DIRS_FLAG		=	.obj_dirs_created
+NAME_UPDATE_FLAG	= 	.name_is_up_to_date
+
+
+#############
+##         ##
+#   FILES   #
+##         ##
+#############
+
 DIR_SRC = ./src
 DIR_OBJ = ./obj
 SUBDIR_SRC = $(wildcard $(DIR_SRC)/*)
@@ -8,20 +60,20 @@ SRC = $(filter %.c,$(shell find $(DIR_SRC)))
 OBJ = $(subst $(DIR_SRC),$(DIR_OBJ),$(SRC:.c=.o))
 INCLUDE = -I ./include
 
-RM		= /bin/rm
-CC		= /bin/clang
-CFLAGS	= -Wall -Werror -Wextra
 
-OBJ_DIRS_FLAG		= .obj_dirs_created
-NAME_UPDATE_FLAG	= .name_is_up_to_date
+#############
+##         ##
+#   RULES   #
+##         ##
+#############
 
 $(NAME): $(OBJ) | $(NAME_UPDATE_FLAG)
 	@if [ -e $(NAME) ] && [ $(NAME_UPDATE_FLAG) -nt $(NAME) ]; then \
 		if [ -e .rebuild ]; then \
 			printf "\t\033[38;2;40;240;60;1mDone rebuilding.\033[m"; \
-			rm -rf .rebuild; \
+			$(RM) ./.rebuild; \
 		else \
-			printf "\033[Kmake: 'libft.a' is up to date.\n"; \
+			printf "\033[Kmake: '$(NAME)' is up to date.\n"; \
 		fi; \
 	else \
 		$(call archive); \
@@ -34,22 +86,23 @@ $(OBJ): $(SRC) | $(OBJ_DIRS_FLAG)
 			if [ "$$c" -ot "$(NAME)" ]; then \
 				continue; \
 			else \
-				printf "There is an update in \033[38;2;240;20;20;1m%s\033[m, rebuilding.\n" `echo $$c | cut -d/ -f3-4`; \
+				printf "There is an update in $(FG_RED)$$c$(CL_END), rebuilding.\n"; \
 				touch .rebuild; \
 				make --silent re; \
 				break; \
 			fi; \
 		done; \
 	else \
-		printf "\033[38;2;40;240;60;1m\033[M  [LIBFT]\n"; \
+		printf "$(FG_GREEN)$(BOLD)  [LIBFT]\033[m\n"; \
 		n=0; \
 		for f in $(SRC); do \
 			obj="$$(echo $$f | sed 's|$(DIR_SRC)|$(DIR_OBJ)|;s|\.c|\.o|')"; \
-			$(CC) $(CFLAGS) $(INCLUDE) -c "$$f" -o "$$obj"; \
+			$(CC) $(CFLAGS) $(INCLUDE) -c "$$f" -o "$$obj" \
+				|| { printf "\nCompilation failed for $(FG_RED)$(BOLD)$$f$(CL_END), un-doing."; rm -rf .rebuild; make -s fclean; exit 1; }; \
 			n=$$(($$n+1)); \
 			printf "\tCompiled files: $$n\033[K\r"; \
 		done; \
-		printf "\n\tDone compiling.\n\033[m"; \
+		printf "\n\tSuccessful."; \
 	fi
 
 $(OBJ_DIRS_FLAG):
@@ -61,19 +114,12 @@ $(NAME_UPDATE_FLAG):
 
 .PHONY: archive all clean fclean re
 
-
-archive	= /bin/ar -rcs $(NAME) $(OBJ); \
-		  /bin/ranlib $(NAME)
-
-
 all: $(NAME)
 
-archive	= /bin/ar -rcs $(NAME) $(OBJ); \
-		  /bin/ranlib $(NAME)
 clean:
-	@$(RM) -rf $(OBJ) $(DIR_OBJ)
+	@$(RM) $(DIR_OBJ)
 
 fclean: clean
-	@$(RM) -rf $(NAME) $(OBJ_DIRS_FLAG) $(NAME_UPDATE_FLAG)
+	@$(RM) $(NAME) $(OBJ_DIRS_FLAG) $(NAME_UPDATE_FLAG)
 
 re: fclean all
