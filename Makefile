@@ -33,7 +33,7 @@ archive	= /usr/bin/ar -rcs $(NAME) $(OBJ); \
 		  /usr/bin/ranlib $(NAME)
 
 CC		= /usr/bin/clang
-CFLAGS	= -Wall -Werror -Wextra -fsanitize=address
+CFLAGS	= -Wall -Werror -Wextra
 
 
 #############
@@ -93,16 +93,15 @@ $(OBJ): $(SRC) | $(OBJ_DIRS_FLAG)
 			fi; \
 		done; \
 	else \
-		printf "$(FG_GREEN)$(BOLD)  [LIBFT]\033[m\n"; \
 		n=0; \
 		for f in $(SRC); do \
 			obj="$$(echo $$f | sed 's|$(DIR_SRC)|$(DIR_OBJ)|;s|\.c|\.o|')"; \
 			$(CC) $(CFLAGS) $(INCLUDE) -c "$$f" -o "$$obj" \
 				|| { printf "\nCompilation failed for $(FG_RED)$(BOLD)$$f$(CL_END), un-doing."; rm -rf .rebuild; make -s fclean; exit 1; }; \
 			n=$$(($$n+1)); \
-			printf "\tCompiled files: $$n\033[K\r"; \
+			printf "$(FG_GREEN)$(BOLD)[LIBFT]\033[m Compiled files: $$n\033[K\r"; \
 		done; \
-		printf "\n\tSuccessful."; \
+		printf "\n$(FG_GREEN)$(BOLD)[LIBFT]\033[m Successful.\n"; \
 	fi
 
 $(OBJ_DIRS_FLAG):

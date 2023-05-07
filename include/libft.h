@@ -88,4 +88,5 @@ t_list		*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 /* UTILS */
 const char	*ft_getenv(const char *envp[], const char *name);
 void		ft_freesplit(char *arr[]);
+void		ft_clear_path(char **path);
 #endif
