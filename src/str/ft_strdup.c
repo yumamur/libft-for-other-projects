@@ -6,7 +6,7 @@
 /*   By: yumamur <yumamur@student.42istanbul.com.t  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 23:02:17 by yumamur           #+#    #+#             */
-/*   Updated: 2023/05/11 20:09:47 by yumamur          ###   ########.fr       */
+/*   Updated: 2023/05/12 14:26:04 by yumamur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,17 @@
 char	*ft_strcdup(const char *s, int c)
 {
 	char	*ret;
+	char	*pt;
 	int		i;
 
-	ret = ft_strchr(s, c);
+	pt = ft_strchr(s, c);
+	if (!pt)
+		return (NULL);
+	ret = malloc(pt - s + 1);
 	if (!ret)
 		return (NULL);
-	ret = malloc(ret - s + 1);
 	i = -1;
-	while (++i < ret - s)
+	while (++i < pt - s)
 		ret[i] = s[i];
 	ret[i] = '\0';
 	return (ret);

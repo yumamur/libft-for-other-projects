@@ -6,7 +6,7 @@
 /*   By: yumamur <yumamur@student.42.tr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 17:20:44 by yumamur           #+#    #+#             */
-/*   Updated: 2023/05/11 01:31:34 by yumamur          ###   ########.fr       */
+/*   Updated: 2023/05/12 14:20:12 by yumamur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,8 @@ char		*ft_strmapi(const char *str, char (*f)(unsigned int, char));
 
 /* ALLOCATION */
 char		*ft_strdup(const char *str);
+char		*ft_strndup(const char *str, size_t n);
+char		*ft_strcdup(const char *str, int c);
 char		*ft_strjoin(const char *s1, const char *s2);
 char		*ft_strjoin_to_s1(char *s1, const char *s2);
 char		*ft_substr(const char *str, unsigned int start, size_t len);
