@@ -1,4 +1,5 @@
 NAME = libft.a
+TITLE = $(FG_GREEN)$(BOLD)[LIBFT]$(CL_END)
 
 ##############
 ##          ##
@@ -70,10 +71,10 @@ INCLUDE = -I ./include
 $(NAME): $(OBJ) | $(NAME_UPDATE_FLAG)
 	@if [ -e $(NAME) ] && [ $(NAME_UPDATE_FLAG) -nt $(NAME) ]; then \
 		if [ -e .rebuild ]; then \
-			printf "\t\033[38;2;40;240;60;1mDone rebuilding.\033[m"; \
+			printf "$(TITLE) Done rebuilding.\n"; \
 			$(RM) ./.rebuild; \
 		else \
-			printf "\033[Kmake: '$(NAME)' is up to date.\n"; \
+			printf "$(TITLE) $(NAME) is up to date.\n"; \
 		fi; \
 	else \
 		$(call archive); \
@@ -86,7 +87,7 @@ $(OBJ): $(SRC) | $(OBJ_DIRS_FLAG)
 			if [ "$$c" -ot "$(NAME)" ]; then \
 				continue; \
 			else \
-				printf "There is an update in $(FG_RED)$$c$(CL_END), rebuilding.\n"; \
+				printf "$(TITLE) There is an update in $(FG_RED)$$c$(CL_END), rebuilding.\n"; \
 				touch .rebuild; \
 				make --silent re; \
 				break; \
@@ -97,11 +98,11 @@ $(OBJ): $(SRC) | $(OBJ_DIRS_FLAG)
 		for f in $(SRC); do \
 			obj="$$(echo $$f | sed 's|$(DIR_SRC)|$(DIR_OBJ)|;s|\.c|\.o|')"; \
 			$(CC) $(CFLAGS) $(INCLUDE) -c "$$f" -o "$$obj" \
-				|| { printf "\nCompilation failed for $(FG_RED)$(BOLD)$$f$(CL_END), un-doing."; rm -rf .rebuild; make -s fclean; exit 1; }; \
+				|| { printf "\n$(TITLE) Compilation failed for $(FG_RED)$(BOLD)$$f$(CL_END), check your code.\n\n"; rm -rf .rebuild; make -s fclean; exit 1; }; \
 			n=$$(($$n+1)); \
-			printf "$(FG_GREEN)$(BOLD)[LIBFT]\033[m Compiled files: $$n\033[K\r"; \
+			printf "$(TITLE) Compiled files: $$n\033[K\r"; \
 		done; \
-		printf "\n$(FG_GREEN)$(BOLD)[LIBFT]\033[m Successful.\n"; \
+		printf "\n$(TITLE) Successful\n"; \
 	fi
 
 $(OBJ_DIRS_FLAG):

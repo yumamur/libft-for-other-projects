@@ -1,24 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_freesplit.c                                     :+:      :+:    :+:   */
+/*   ft_strctrl.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yumamur <yumamur@student.42istanbul.com.t  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/02 16:34:24 by yumamur           #+#    #+#             */
-/*   Updated: 2023/05/03 15:52:34 by yumamur          ###   ########.fr       */
+/*   Created: 2023/05/09 20:31:53 by yumamur           #+#    #+#             */
+/*   Updated: 2023/05/09 20:31:55 by yumamur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-
-void	ft_freesplit(char *arr[])
+int	ft_strctrl(char *str, int c)
 {
 	int	i;
 
-	i = -1;
-	while (arr[++i])
-		free(arr[i]);
-	free(arr);
-	arr = NULL;
+	i = 0;
+	if (!str)
+		return (0);
+	while (str[i] != '\0')
+	{
+		if (str[i] == (char )c)
+			return (1);
+		i++;
+	}
+	return (0);
 }
