@@ -14,28 +14,19 @@
 
 char	*ft_strcdup(const char *s, int c)
 {
-	char	*ret;
 	char	*pt;
-	int		i;
 
 	pt = ft_strchr(s, c);
 	if (!pt)
 		return (NULL);
-	ret = malloc(pt - s + 1);
-	if (!ret)
-		return (NULL);
-	i = -1;
-	while (++i < pt - s)
-		ret[i] = s[i];
-	ret[i] = '\0';
-	return (ret);
+	return (ft_strndup(s, pt - s));
 }
 
-char	*ft_strndup(const char *s, size_t n)
+char	*ft_strndup(const char *s, unsigned long n)
 {
-	char	*ret;
-	size_t	len;
-	size_t	i;
+	char			*ret;
+	unsigned long	len;
+	unsigned long	i;
 
 	len = ft_strlen(s);
 	if (n > len)
