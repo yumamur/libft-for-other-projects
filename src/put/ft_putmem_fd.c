@@ -21,6 +21,8 @@ void	ft_putmem_fd(int fd, void *mem, size_t n, const char *sep)
 	size_t			i;
 	unsigned char	tmp;
 
+	if (!mem)
+		return ;
 	i = 0;
 	while (i < n)
 	{
@@ -34,4 +36,5 @@ void	ft_putmem_fd(int fd, void *mem, size_t n, const char *sep)
 		if (sep && i < n)
 			write(fd, sep, ft_strlen(sep));
 	}
+	write(fd, "\n", 1);
 }

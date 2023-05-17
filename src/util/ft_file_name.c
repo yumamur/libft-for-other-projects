@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-void	ft_clear_path(char **path)
+void	ft_file_name(char **path)
 {
 	char	*tmp;
 

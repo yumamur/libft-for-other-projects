@@ -19,6 +19,7 @@
 
 # include <stdlib.h>
 # include <unistd.h>
+# include "memft.h"
 
 /* STRUCTURE */
 typedef struct s_list
@@ -38,17 +39,6 @@ int			ft_isprint(int c);
 /* CONVERTION */
 int			ft_atoi(const char *str);
 char		*ft_itoa(int n);
-
-/* MEMORY */
-int			ft_memcmp(const void *s1, const void *s2, size_t n);
-void		ft_bzero(void *str, size_t n);
-void		*ft_calloc(size_t nmemb, size_t size);
-void		*ft_realloc_str(char *str, size_t size);
-void		*ft_memchr(const void *str, int c, size_t n);
-void		*ft_memcpy(void *dst, const void *src, size_t n);
-void		*ft_memmove(void *dst, const void *src, size_t n);
-void		*ft_memset(void *str, int c, size_t n);
-void		*ft_memdup(const void *mem, size_t n);
 
 /* STRING */
 size_t		ft_strlen(const char *str);
@@ -100,5 +90,5 @@ const char	*ft_getenv(const char *envp[], const char *name);
 ssize_t		ft_envvar_namelen(const char *pt);
 void		ft_free_pt(void *pt);
 void		ft_free_2pt(char **pt);
-void		ft_clear_path(char **path);
+void		ft_file_name(char **path);
 #endif

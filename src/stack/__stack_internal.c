@@ -18,7 +18,7 @@ void	_update_index(t_stack *pt_stack)
 
 	pt = (unsigned long int *)&pt_stack->index;
 	if (!pt_stack->size)
-		*pt = pt_stack->_type * pt_stack->size;
+		*pt = 0;
 	else
 		*pt = pt_stack->_type * (pt_stack->size - 1);
 }

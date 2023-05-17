@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/libft.h"
+#include "../../include/memft.h"
 
 void	*ft_memdup(const void *mem, size_t n)
 {
@@ -20,5 +20,16 @@ void	*ft_memdup(const void *mem, size_t n)
 		return (NULL);
 	ret = malloc(n);
 	ft_memcpy(ret, mem, n);
+	return (ret);
+}
+
+void	*ft_memdup_rev(const void *mem, size_t n)
+{
+	void	*ret;
+
+	if (!mem || !n)
+		return (NULL);
+	ret = malloc(n);
+	ft_memcpy_rev(ret, mem, n);
 	return (ret);
 }

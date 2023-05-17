@@ -13,14 +13,15 @@
 #ifndef STACKFT_H
 # define STACKFT_H
 
-# include "libft.h"
+# include "memft.h"
+# include <unistd.h>
 
 # ifndef _STRUCT_STACK
 #  define _STRUCT_STACK
 
 typedef struct s_stack
 {
-	const void				*data;
+	const char				*data;
 	const unsigned int		size;
 	const unsigned int		cap;
 	const unsigned long int	index;
