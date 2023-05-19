@@ -10,14 +10,12 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../include/shellft.h"
 
-void	ft_file_name(char **path)
+char	*ft_file_name(char *path)
 {
 	char	*tmp;
 
-	tmp = ft_strdup(ft_strrchr(*path, '/') + 1);
-	free(*path);
-	*path = ft_strdup(tmp);
-	free(tmp);
+	tmp = ft_strdup(ft_strrchr(path, '/') + 1);
+	return (tmp);
 }

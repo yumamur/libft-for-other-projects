@@ -1,0 +1,27 @@
+#include "../../include/shellft.h"
+
+int	ft_shell_var(int fd, const char *buf, const char *envp[])
+{
+	int			i;
+	int			len;
+	char		*var;
+	const char	*pt;
+
+	i = 1;
+	if (buf[i] == 0)
+	{
+		pt = ft_getenv((const char **)envp, "SHELL");
+		write(fd, pt, ft_strlen(pt));
+	}
+	if (buf[i] == '_' || ft_isalpha(buf[i]))
+	{
+		len = ft_envvar_namelen(&(buf[i - 1]));
+		var = malloc(len + 1);
+		ft_strlcpy(var, &(buf[i]), len + 1);
+		pt = ft_getenv(envp, var);
+		ft_free_pt(var);
+		write(fd, pt, ft_strlen(pt));
+		i += len;
+	}
+	return (i);
+}

@@ -13,13 +13,13 @@
 #ifndef LIBFT_H
 # define LIBFT_H
 
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 1024
-# endif
-
 # include <stdlib.h>
 # include <unistd.h>
 # include "memft.h"
+
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 1024
+# endif
 
 /* STRUCTURE */
 typedef struct s_list
@@ -86,9 +86,7 @@ void		ft_lstiter(t_list *node, void (*f)(void *));
 t_list		*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 
 /* UTILS */
-const char	*ft_getenv(const char *envp[], const char *name);
-ssize_t		ft_envvar_namelen(const char *pt);
 void		ft_free_pt(void *pt);
 void		ft_free_2pt(char **pt);
-void		ft_file_name(char **path);
+void		ft_free_change(void *dest, void *src);
 #endif

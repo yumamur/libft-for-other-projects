@@ -6,7 +6,7 @@
 /*   By: yumamur <yumamur@student.42istanbul.com.t  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 15:47:27 by yumamur           #+#    #+#             */
-/*   Updated: 2023/05/15 17:36:07 by yumamur          ###   ########.fr       */
+/*   Updated: 2023/05/19 16:01:25 by yumamur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,6 @@ void	ft_stack_push(t_stack *pt_stack, void *val)
 		}
 	}
 	_stack_setsize(pt_stack, pt_stack->size + 1);
-	ft_memcpy((char *)&((pt_stack->data)[pt_stack->index]), val, pt_stack->_type);
+	ft_memcpy((char *)&((pt_stack->data)[pt_stack->index]),
+		val, pt_stack->_type);
 }

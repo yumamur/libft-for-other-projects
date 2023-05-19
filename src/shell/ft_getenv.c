@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../include/shellft.h"
 
 static const char	*ft_getenv_2(const char *envp[], const char *name)
 {
