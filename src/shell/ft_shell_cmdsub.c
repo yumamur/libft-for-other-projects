@@ -11,78 +11,117 @@
 /* ************************************************************************** */
 
 #include "../../include/shellft.h"
+#include "../../include/def/cmdsub.h"
 
-static int	find_quote(const char *buf, t_cmdsub cmd, t_quote qt)
+void	if_quoted(t_cmdsub *cmd, const char *ptr, int c, unsigned long int len)
 {
-	if (ft_strnchr(buf, 34, cmd.end - buf))
+	cmd->qt.bgn = ft_memchr(ptr, c, len);
+	if (cmd->qt.bgn)
+		cmd->qt.end = ft_strchr(cmd->qt.bgn + 1, c);
+	if (!cmd->qt.end)
 	{
-		qt.start = ft_strnchr(buf, 34, cmd.end - buf);
-		qt.end = ft_strchr(qt.start + 1, 34);
+		cmd->pt_err = cmd->qt.bgn;
+		cmd->qt.bgn = NULL;
 	}
-	else if (ft_strnchr(buf, 39, cmd.end - buf))
-	{
-		qt.start = ft_strnchr(buf, 39, cmd.end - buf);
-		qt.end = ft_strchr(qt.start + 1, 39);
-	}
-	if (qt.start && !qt.end)
-		return (-1);
-	if (qt.end && qt.end > cmd.end)
-	{
-		cmd.end = ft_strchr(qt.end, ')');
-		if (!cmd.end)
-			return (-2);
-	}
-	if (qt.start && qt.end)
-		ft_memset(&cmd.mark[qt.start - buf], 1, qt.end - qt.start + 1);
-	return (!!qt.start);
 }
-static int	mark_subs(const char *buf, char *mark_buf)
+
+static int	find_quotes(t_cmdsub *cmd, t_quote *qt)
 {
 	const char	*pt;
 
-	pt = ft_strstr(buf, "$(");
+	if (!qt->bgn && !qt->end)
+	{
+		if (ft_strnchr(cmd->bgn, 34, cmd->end - cmd->bgn))
+			if_quoted(cmd, cmd->bgn, 34, cmd->end - cmd->bgn);
+		else if (ft_strnchr(cmd->bgn, 39, cmd->end - cmd->bgn))
+			if_quoted(cmd, cmd->bgn, 39, cmd->end - cmd->bgn);
+		return (1);
+	}
+	else
+	{
+		pt = qt->bgn;
+		if (ft_strnchr(qt->end + 1, 34, cmd->end - qt->end))
+			if_quoted(cmd, qt->end + 1, 34, cmd->end - qt->end);
+		else if (ft_strnchr(qt->end + 1, 39, cmd->end - qt->end))
+			if_quoted(cmd, qt->end + 1, 39, cmd->end - qt->end);
+		if (pt == qt->bgn || !qt->end)
+			return (0);
+		else
+			return (1);
+	}
 }
 
-// static int	mark_quote(const char *buf, char *mark_buf)
-// {
-// 	t_quote	ctl_q;
-// 	size_t	i;
-// 	size_t	len;
+static int	mark_quote(t_cmdsub *cmd, t_quote *qt)
+{
+	int	fin;
 
-// 	i = 0;
-// 	if (ft_strchr(buf, 34))
-// 	{
-// 		i = ft_strchr(buf, 34) - buf;
-// 		ctl_q.start = &buf[i];
-// 		ctl_q.end = ft_strchr(&buf[i + 1], 34);
-// 	}
-// 	else if (ft_strchr(buf, 39))
-// 	{
-// 		i = ft_strchr(buf, 39) - buf;
-// 		ctl_q.start = &buf[i];
-// 		ctl_q.end = ft_strchr(&buf[i + 1], 39);
-// 	}
-// 	if (ctl_q.start && !ctl_q.end)
-// 		return (-1);
-// 	else if (ctl_q.start && ctl_q.end)
-// 	{
-// 		len = ctl_q.end - ctl_q.start + 1;
-// 		ft_memset(&mark_buf[i], 1, len);
-// 		return (mark_quote(&buf[len], &mark_buf[len]));
-// 	}
-// 	return (0);
-// }
+	if (!cmd->end)
+		return (_set_errno(cmd, UNFINISHED_SUB));
+	fin = find_quotes(cmd, qt);
+	if (!fin)
+		return (0);
+	if (cmd->pt_err)
+		return (_set_errno(cmd, UNMATCHED_QT));
+	if (qt->end > cmd->end)
+	{
+		cmd->end = ft_strchr(qt->end, ')');
+		if (!cmd->end)
+			return (_set_errno(cmd, UNFINISHED_SUB));
+	}
+	if (qt->bgn && qt->end)
+		ft_memset(&cmd->mark[qt->bgn - cmd->bgn], 'q', qt->end - qt->bgn + 1);
+	return (!!qt->end && !!qt->end * mark_quote(cmd, qt));
+}
+
+static void	fix_paranthesis(t_cmdsub *cmd)
+{
+	t_cmdsub		*pt;
+
+	pt = NULL;
+	while (cmd)
+	{
+		if (cmd->next)
+			pt = cmd->next;
+		while (pt)
+		{
+			if (cmd->end == pt->end)
+				cmd->end = ft_strchr(pt->end + 1, ')');
+			if (!cmd->end)
+				_set_errno(cmd, UNFINISHED_SUB);
+			else
+				mark_quote(cmd, &cmd->qt);
+			if (cmd->errno)
+				return ;
+			if (pt->next)
+				pt = pt->next;
+			else
+				break ;
+		}
+		cmd = cmd->next;
+	}
+}
 
 int	ft_shell_cmdsub(int fd, const char *buf, const char *envp[])
 {
 	t_cmdsub	cmd;
-	int			ret;
+	t_cmdsub	*cur;
+	const char	*n_sub;
 
-	cmd.mark = ft_calloc(ft_strlen(buf), 1);
-	ret = find_quote(buf, cmd, cmd.qt);
-	if (ret < 0)
-		return (ret);
-	if (mark_subs(buf, cmd.mark))
-		return (-3);
-	return (1);
+	if (!_cmdsub_init(&cmd, buf, NULL))
+		return (-1);
+	cur = &cmd;
+	if (mark_quote(&cmd, &cmd.qt) < 0)
+		return (_set_return(&cmd));
+	n_sub = ft_strnstr(cmd.bgn, "$(", cmd.end - cmd.bgn);
+	while (n_sub)
+	{
+		cur->next = malloc(sizeof(t_cmdsub));
+		_cmdsub_init(cur->next, n_sub, &(cmd.mark[n_sub - cmd.bgn + 2]));
+		cur = cur->next;
+		mark_quote(cur, &cur->qt);
+		fix_paranthesis(&cmd);
+		n_sub = ft_strnstr(cur->bgn, "$(", cmd.end - cur->bgn);
+	}
+	write(fd, *envp, 1);
+	return (_set_return(&cmd));
 }

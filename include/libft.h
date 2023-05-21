@@ -42,6 +42,7 @@ char		*ft_itoa(int n);
 
 /* STRING */
 size_t		ft_strlen(const char *str);
+size_t		ft_strlen_max(const char *str, size_t max);
 int			ft_strcmp(const char *s1, const char *s2);
 int			ft_strncmp(const char *s1, const char *s2, size_t n);
 int			ft_strctrl(char *str, int c);

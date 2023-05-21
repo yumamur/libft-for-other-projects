@@ -11,6 +11,18 @@
 /* ************************************************************************** */
 
 #include "../../include/libft.h"
+#include <stddef.h>
+
+size_t	ft_strlen_max(const char *str, size_t max)
+{
+	size_t	i;
+
+	i = ft_strlen(str);
+	if (i > max)
+		return (max);
+	else
+		return (i);
+}
 
 size_t	ft_strlen(const char *str)
 {

@@ -1,19 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   shellft.h                                          :+:      :+:    :+:   */
+/*   cmdsub.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yumamur <yumamur@student.42istanbul.com.t  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/19 16:00:25 by yumamur           #+#    #+#             */
-/*   Updated: 2023/05/20 18:21:42 by yumamur          ###   ########.fr       */
+/*   Created: 2023/05/21 22:49:42 by yumamur           #+#    #+#             */
+/*   Updated: 2023/05/21 22:49:43 by yumamur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SHELLFT_H
-# define SHELLFT_H
+#ifndef CMDSUB_H
+# define CMDSUB_H
 
-# include "libft.h"
+# define UNMATCHED_QT -3
+# define UNFINISHED_SUB -2
+
+# include "../libft.h"
 
 # ifndef SHELL_STRUCTS
 #  define SHELL_STRUCTS
@@ -36,9 +39,8 @@ typedef struct s_cmdsub
 }	t_cmdsub;
 # endif
 
-char		*ft_file_name(char *path);
-const char	*ft_getenv(const char *envp[], const char *name);
-ssize_t		ft_envvar_namelen(const char *pt);
-int			ft_shell_var(int fd, const char *buf, const char *envp[]);
-int			ft_shell_cmdsub(int fd, const char *buf, const char *envp[]);
+int	_set_return(t_cmdsub *cmd);
+int	_set_errno(t_cmdsub *cmd, int num);
+int	_cmdsub_init(t_cmdsub *pt, const char *buf, char *mark);
+
 #endif
