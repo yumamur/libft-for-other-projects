@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/stackft.h"
-#include "../../include/def/stackft_internal.h"
+#include "stackft.h"
+#include "def/stackft_internal.h"
 
 void	*ft_stack_pop(t_stack *pt_stack)
 {

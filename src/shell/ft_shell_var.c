@@ -10,19 +10,19 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/shellft.h"
+#include "shellft.h"
 
-int	ft_shell_var(int fd, const char *buf, const char *envp[])
+int	ft_shell_var(int fd, t_c_char *buf, t_c_char *envp[])
 {
 	int			i;
 	int			len;
 	char		*var;
-	const char	*pt;
+	t_c_char	*pt;
 
 	i = 1;
 	if (buf[i] == 0)
 	{
-		pt = ft_getenv((const char **)envp, "SHELL");
+		pt = ft_getenv((t_c_char **)envp, "SHELL");
 		write(fd, pt, ft_strlen(pt));
 	}
 	if (buf[i] == '_' || ft_isalpha(buf[i]))

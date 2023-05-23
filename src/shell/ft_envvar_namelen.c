@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-ssize_t	ft_envvar_namelen(const char *pt)
+ssize_t	ft_envvar_namelen(t_c_char *pt)
 {
 	int	i;
 

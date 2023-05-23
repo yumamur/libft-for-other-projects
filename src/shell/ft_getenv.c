@@ -10,14 +10,14 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/shellft.h"
+#include "shellft.h"
 
-static const char	*ft_getenv_2(const char *envp[], const char *name)
+static t_c_char	*ft_getenv_2(t_c_char *envp[], t_c_char *name)
 {
-	const char		**ptenv;
-	size_t			len;
-	unsigned short	name_start;
-	unsigned short	ptenv_start;
+	t_c_char	**ptenv;
+	size_t		len;
+	t_ushort	name_start;
+	t_ushort	ptenv_start;
 
 	ptenv = envp;
 	name_start = (name[0] * 256) + name[1];
@@ -33,22 +33,22 @@ static const char	*ft_getenv_2(const char *envp[], const char *name)
 	return (NULL);
 }
 
-const char	*ft_getenv(const char *envp[], const char *name)
+t_c_char	*ft_getenv(t_c_char *envp[], t_c_char *name)
 {
-	const char		**ptenv;
-	unsigned short	name_start;
-	unsigned short	ptenv_start;
+	t_c_char	**ptenv;
+	t_ushort	name_start;
+	t_ushort	ptenv_start;
 
 	if (!envp || !envp[0] || !name || name[0] == '\0')
 		return (NULL);
 	if (name[1] == '\0')
 	{
 		ptenv = envp;
-		((unsigned char *)&name_start)[0] = *(unsigned char *)name;
-		((unsigned char *)&name_start)[1] = '=';
+		((t_uchar *)&name_start)[0] = *(t_uchar *)name;
+		((t_uchar *)&name_start)[1] = '=';
 		while (*ptenv)
 		{
-			ptenv_start = *((unsigned short *)*ptenv);
+			ptenv_start = *((t_ushort *)*ptenv);
 			if (ptenv_start == name_start)
 				return (&(*ptenv)[2]);
 			ptenv++;

@@ -12,19 +12,19 @@
 
 #include "libft.h"
 
-static size_t	ft_zerosaver(int n)
+static size_t	zerosaver(int n)
 {
 	while (n != 0)
-		return (1 + ft_zerosaver(n / 10));
+		return (1 + zerosaver(n / 10));
 	return (0);
 }
 
-static size_t	ft_digitcount(int n)
+static size_t	digitcount(int n)
 {
 	if (n == 0)
 		return (1);
 	else
-		return (ft_zerosaver(n));
+		return (zerosaver(n));
 }
 
 char	*ft_itoa(int n)
@@ -34,7 +34,7 @@ char	*ft_itoa(int n)
 	long	x;
 
 	x = n;
-	d = ft_digitcount(x);
+	d = digitcount(x);
 	if (n < 0)
 		d += 1;
 	pt = malloc(d + 1);

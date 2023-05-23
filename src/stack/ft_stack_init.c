@@ -10,12 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/stackft.h"
-#include "../../include/def/stackft_internal.h"
+#include "stackft.h"
+#include "def/stackft_internal.h"
 
-/* Don't mind the casting, it saves about 16 bytes
-*/
-void	ft_stack_init(t_stack *pt_stack, unsigned int cap, unsigned long _type)
+void	ft_stack_init(t_stack *pt_stack, t_uint cap, t_ulong _type)
 {
 	if (!pt_stack || !cap || !_type)
 		return ;

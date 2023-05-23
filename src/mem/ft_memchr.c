@@ -10,18 +10,18 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/memft.h"
+#include "memft.h"
 
-void	*ft_memchr(const void *mem, int c, size_t n)
+void	*ft_memchr(t_c_void *mem, int c, size_t n)
 {
-	unsigned char	*pt;
-	size_t			i;
+	t_uchar	*pt;
+	size_t	i;
 
 	i = 0;
-	pt = (unsigned char *)mem;
+	pt = (t_uchar *)mem;
 	while (i < n)
 	{
-		if ((unsigned char) c == pt[i])
+		if ((t_uchar) c == pt[i])
 			return ((void *)mem + i);
 		i++;
 	}

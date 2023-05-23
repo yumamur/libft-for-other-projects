@@ -10,23 +10,23 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/memft.h"
+#include "memft.h"
 
-int	ft_memcmp(const void *s1, const void *s2, size_t n)
+int	ft_memcmp(t_c_void *s1, t_c_void *s2, size_t n)
 {
-	unsigned char	*ss1;
-	unsigned char	*ss2;
-	size_t			i;
+	t_uchar	*ss1;
+	t_uchar	*ss2;
+	size_t	i;
 
 	i = 0;
-	ss1 = ((unsigned char *)s1);
-	ss2 = ((unsigned char *)s2);
+	ss1 = ((t_uchar *)s1);
+	ss2 = ((t_uchar *)s2);
 	if (n == 0)
 		return (0);
 	while (i < n)
 	{
 		if (ss1[i] != ss2[i])
-			return ((unsigned char)ss1[i] - (unsigned char)ss2[i]);
+			return ((t_uchar)ss1[i] - (t_uchar)ss2[i]);
 		i++;
 	}
 	return (0);

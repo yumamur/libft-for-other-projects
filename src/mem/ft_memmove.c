@@ -10,17 +10,17 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/memft.h"
+#include "memft.h"
 
-void	*ft_memmove(void *dest, const void *src, size_t n)
+void	*ft_memmove(void *dest, t_c_void *src, size_t n)
 {
-	unsigned char		*ps;
-	unsigned char		*pd;
+	t_uchar	*ps;
+	t_uchar	*pd;
 
 	if (!dest && !src)
 		return (NULL);
-	ps = (unsigned char *)src;
-	pd = (unsigned char *)dest;
+	ps = (t_uchar *)src;
+	pd = (t_uchar *)dest;
 	if (ps < pd)
 		while (n--)
 			*(pd + n) = *(ps + n);

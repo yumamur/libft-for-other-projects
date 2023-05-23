@@ -10,12 +10,12 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/libft.h"
+#include "libft.h"
 
 void	**ft_realloc_2pt(void **arr, size_t n)
 {
-	void				**ret;
-	unsigned long int	i;
+	void	**ret;
+	t_ulint	i;
 
 	if (!arr)
 		return (NULL);

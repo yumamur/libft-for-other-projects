@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/libft.h"
+#include "libft.h"
 
-char	*ft_substr(const char *s, unsigned int start, size_t len)
+char	*ft_substr(t_c_char *s, t_uint start, size_t len)
 {
 	char	*ret;
 	size_t	size;
@@ -26,9 +26,9 @@ char	*ft_substr(const char *s, unsigned int start, size_t len)
 	if (start > size)
 		return (ft_strdup(""));
 	if (size - start < len)
-		ret = (char *)malloc((size - start + 1) * sizeof(char));
+		ret = malloc(size - start + 1);
 	else
-		ret = (char *)malloc((len + 1) * sizeof(char));
+		ret = malloc(len + 1);
 	if (ret == NULL)
 		return (NULL);
 	ft_strlcpy(ret, s + start, len + 1);

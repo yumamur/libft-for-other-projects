@@ -13,8 +13,8 @@
 #ifndef CMDSUB_H
 # define CMDSUB_H
 
-# define UNMATCHED_QT -3
-# define UNFINISHED_SUB -2
+# define UNMATCHED_QT 1
+# define UNFINISHED_SUB 2
 
 # include "../libft.h"
 
@@ -23,24 +23,23 @@
 
 typedef struct s_quote
 {
-	const char		*bgn;
-	const char		*end;
+	t_c_char	*bgn;
+	t_c_char	*end;
 }	t_quote;
 
 typedef struct s_cmdsub
 {
-	const char		*bgn;
-	const char		*end;
-	char			*mark;
-	const char		*pt_err;
+	t_c_char		*bgn;
+	t_c_char		*end;
+	t_c_char		*pt_err;
 	int				errno;
 	struct s_quote	qt;
 	struct s_cmdsub	*next;
 }	t_cmdsub;
 # endif
 
-int	_set_return(t_cmdsub *cmd);
-int	_set_errno(t_cmdsub *cmd, int num);
-int	_cmdsub_init(t_cmdsub *pt, const char *buf, char *mark);
+t_cmdsub	*__set_return(t_cmdsub *cmd);
+int			__set_errno(t_cmdsub *cmd, int num);
+int			__cmdsub_init(t_cmdsub *pt, t_c_char *buf);
 
 #endif

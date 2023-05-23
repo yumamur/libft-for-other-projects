@@ -10,11 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/memft.h"
+#include "memft.h"
 
 void	*ft_calloc(size_t count, size_t size)
 {
-	void		*pt;
+	void	*pt;
 
 	pt = malloc(count * size);
 	if (!pt)

@@ -10,7 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_atoi(const char *str)
+#include "libft.h"
+
+int	ft_atoi(t_c_char *str)
 {
 	int		ret;
 	int		sign;

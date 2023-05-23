@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/libft.h"
+#include "libft.h"
 
-static size_t	ft_arrcount(const char *str, char c)
+static size_t	ft_arrcount(t_c_char *str, char c)
 {
 	size_t	count;
 
@@ -31,7 +31,7 @@ static size_t	ft_arrcount(const char *str, char c)
 	return (count);
 }
 
-static size_t	ft_wordlen(const char *str, char c)
+static size_t	ft_wordlen(t_c_char *str, char c)
 {
 	size_t	i;
 
@@ -47,7 +47,7 @@ static size_t	ft_wordlen(const char *str, char c)
 	return (i);
 }
 
-static char	**ft_splinter(const char *str, char c, char **pt, size_t count)
+static char	**ft_splinter(t_c_char *str, char c, char **pt, size_t count)
 {
 	size_t	n;
 
@@ -75,7 +75,7 @@ static char	**ft_splinter(const char *str, char c, char **pt, size_t count)
 	return (pt);
 }
 
-char	**ft_split(const char *str, char c)
+char	**ft_split(t_c_char *str, char c)
 {
 	size_t	count;
 	char	**pt;

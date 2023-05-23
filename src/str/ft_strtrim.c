@@ -10,23 +10,20 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/libft.h"
+#include "libft.h"
 
-static int	ft_ifexist(const char c, const char *ctrl)
+static int	ft_ifexist(t_c_char c, t_c_char *ctrl)
 {
-	while (*ctrl != '\0')
-	{
-		if (c == *ctrl)
+	while (*ctrl)
+		if (c == *ctrl++)
 			return (1);
-		ctrl++;
-	}
 	return (0);
 }
 
-char	*ft_strtrim(const char *s1, const char *set)
+char	*ft_strtrim(t_c_char *s1, t_c_char *set)
 {
-	long unsigned int	size;
-	char				*pt;
+	t_ulint	size;
+	char	*pt;
 
 	if (!s1)
 		return (NULL);
@@ -39,7 +36,7 @@ char	*ft_strtrim(const char *s1, const char *set)
 	while (*s1 != '\0' && ft_ifexist(*pt, set) != 0)
 		pt--;
 	size = pt - s1 + 2;
-	pt = (char *)malloc(size * sizeof(char));
+	pt = malloc(size);
 	if (!pt)
 		return (NULL);
 	pt[--size] = '\0';

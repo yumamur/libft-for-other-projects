@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/memft.h"
+#include "memft.h"
 
 void	*ft_memset(void *s, int c, size_t n)
 {
@@ -19,7 +19,7 @@ void	*ft_memset(void *s, int c, size_t n)
 	i = 0;
 	while (i < n)
 	{
-		((unsigned char *)s)[i] = c;
+		((t_uchar *)s)[i] = c;
 		i++;
 	}
 	return (s);

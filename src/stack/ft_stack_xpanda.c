@@ -10,17 +10,17 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/stackft.h"
-#include "../../include/def/stackft_internal.h"
+#include "stackft.h"
+#include "def/stackft_internal.h"
 
-void	ft_stack_xpanda(t_stack *pt_stack, unsigned int n)
+void	ft_stack_xpanda(t_stack *pt_stack, t_uint n)
 {
-	void			*buf;
-	unsigned int	*pt;
+	void	*buf;
+	t_uint	*pt;
 
 	if (!pt_stack || !n || !pt_stack->data)
 		return ;
-	pt = (unsigned int *)&(pt_stack->cap);
+	pt = (t_uint *)&(pt_stack->cap);
 	*pt += n;
 	buf = malloc(pt_stack->cap * pt_stack->_type);
 	buf = ft_memcpy(buf, pt_stack->data, pt_stack->size * pt_stack->_type);

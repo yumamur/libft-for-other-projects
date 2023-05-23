@@ -10,10 +10,19 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/libft.h"
-#include <stddef.h>
+#include "libft.h"
 
-size_t	ft_strlen_max(const char *str, size_t max)
+size_t	ft_strlen(t_c_char *str)
+{
+	int	i;
+
+	i = 0;
+	while (*str++)
+		i++;
+	return (i);
+}
+
+size_t	ft_strlen_max(t_c_char *str, size_t max)
 {
 	size_t	i;
 
@@ -22,14 +31,4 @@ size_t	ft_strlen_max(const char *str, size_t max)
 		return (max);
 	else
 		return (i);
-}
-
-size_t	ft_strlen(const char *str)
-{
-	int	i;
-
-	i = 0;
-	while (*str++)
-		i++;
-	return (i);
 }

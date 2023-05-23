@@ -10,55 +10,73 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/def/cmdsub.h"
+#include "def/cmdsub.h"
 
-int	_set_return(t_cmdsub *cmd)
+t_cmdsub	*__set_free(t_cmdsub *cmd)
 {
-	while (cmd)
+	t_cmdsub	*pt;
+
+	if (!cmd)
+		return (NULL);
+	while (cmd->next)
 	{
-		if (cmd->errno == UNMATCHED_QT)
+		pt = cmd->next;
+		while (pt->next)
+			pt = pt->next;
+		free(pt);
+	pt = NULL;
+	}
+	free(cmd);
+	return (NULL);
+}
+
+t_cmdsub	*__set_return(t_cmdsub *cmd)
+{
+	t_cmdsub	*pt;
+
+	pt = cmd;
+	while (pt)
+	{
+		if (pt->errno == UNMATCHED_QT)
 		{
 			write(2, "zsh: unmatched ", 15);
-			write(2, cmd->pt_err, 1);
+			write(2, pt->pt_err, 1);
 			write(2, " near \033[31;1;4m(\033[m", 19);
-			write(2, cmd->pt_err, ft_strlen_max(cmd->pt_err, 10));
+			write(2, pt->pt_err, ft_strlen_max(pt->pt_err, 10));
 			write(2, "\033[31;1;4m)\033[m\n", 15);
-			return (UNMATCHED_QT);
+			return (__set_free(cmd));
 		}
-		else if (cmd->errno)
+		else if (pt->errno)
 		{
 			write(2, "zsh: parse error\n", 17);
-			return (cmd->errno);
+			return (__set_free(cmd));
 		}
-		if (cmd->next)
-			cmd = cmd->next;
+		if (pt->next)
+			pt = pt->next;
 		else
 			break ;
 	}
-	return (1);
+	return (cmd);
 }
 
-int	_set_errno(t_cmdsub *cmd, int num)
+int	__set_errno(t_cmdsub *cmd, int num)
 {
 	if (!cmd)
 		return (0);
 	cmd->errno = num;
-	return (num);
+	return (0);
 }
 
-int	_cmdsub_init(t_cmdsub *pt, const char *buf, char *mark)
+int	__cmdsub_init(t_cmdsub *pt, t_c_char *buf)
 {
 	if (!buf)
 		return (0);
-	pt->bgn = buf + 2;
+	if (!pt)
+		pt = malloc(sizeof(t_cmdsub));
+	pt->bgn = buf;
 	pt->end = ft_strchr(pt->bgn, ')');
-	if (!mark)
-	{
-		pt->mark = malloc(ft_strlen(pt->bgn));
-		ft_memset(pt->mark, 'a', ft_strlen(pt->bgn));
-	}
-	else
-		pt->mark = mark;
+	if (!pt->end)
+		return (__set_errno(pt, UNFINISHED_SUB));
 	pt->errno = 0;
 	pt->pt_err = NULL;
 	pt->next = NULL;

@@ -10,21 +10,21 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/libft.h"
+#include "libft.h"
 
-char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
+char	*ft_strnstr(t_c_char *haystack, t_c_char *needle, size_t len)
 {
 	size_t	n;
 	size_t	i;
 	size_t	l;
 
 	i = 0;
-	if (haystack == NULL && len == 0)
-		return (0);
-	if (needle[i] == '\0')
+	if (!haystack && len == 0)
+		return (NULL);
+	if (!needle[i])
 		return ((char *)haystack);
 	l = len;
-	while (haystack[i] != '\0' && l-- > 0)
+	while (haystack[i] && l-- > 0)
 	{
 		n = 0;
 		while (haystack[i + n] == needle[n] && haystack[i + n] != '\0')
@@ -38,7 +38,15 @@ char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 	return (NULL);
 }
 
-char	*ft_strstr(const char *haystack, const char *needle)
+int	ft_strnstr_pt(t_c_char *buf, t_c_char *str, size_t len, t_c_char *pt)
+{
+	pt = ft_strnstr(buf, str, len);
+	if (!pt)
+		return (0);
+	return (1);
+}
+
+char	*ft_strstr(t_c_char *haystack, t_c_char *needle)
 {
 	size_t	n;
 	size_t	i;
@@ -60,4 +68,12 @@ char	*ft_strstr(const char *haystack, const char *needle)
 		i++;
 	}
 	return (NULL);
+}
+
+int	ft_strstr_pt(t_c_char *buf, t_c_char *str, t_c_char *pt)
+{
+	pt = ft_strstr(buf, str);
+	if (!pt)
+		return (0);
+	return (1);
 }

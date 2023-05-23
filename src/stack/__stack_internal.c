@@ -10,13 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/def/stackft_internal.h"
+#include "def/stackft_internal.h"
 
 void	_update_index(t_stack *pt_stack)
 {
-	unsigned long int	*pt;
+	t_ulint	*pt;
 
-	pt = (unsigned long int *)&pt_stack->index;
+	pt = (t_ulint *)&pt_stack->index;
 	if (!pt_stack->size)
 		*pt = 0;
 	else
@@ -25,8 +25,8 @@ void	_update_index(t_stack *pt_stack)
 
 void	_stack_delone(t_stack *pt_stack)
 {
-	unsigned long int	datasize;
-	char				*pt;
+	t_ulint	datasize;
+	char	*pt;
 
 	datasize = pt_stack->_type;
 	pt = (char *)&(pt_stack->data[pt_stack->index]);
@@ -35,27 +35,27 @@ void	_stack_delone(t_stack *pt_stack)
 	_stack_setsize(pt_stack, pt_stack->size - 1);
 }
 
-void	_stack_settype(t_stack *pt_stack, unsigned long _type)
+void	_stack_settype(t_stack *pt_stack, t_ulong _type)
 {
-	unsigned long	*pt;
+	t_ulong	*pt;
 
-	pt = (unsigned long *)&pt_stack->_type;
+	pt = (t_ulong *)&pt_stack->_type;
 	*pt = _type;
 }
 
-void	_stack_setcap(t_stack *pt_stack, unsigned int cap)
+void	_stack_setcap(t_stack *pt_stack, t_uint cap)
 {
-	unsigned int	*pt;
+	t_uint	*pt;
 
-	pt = (unsigned int *)&pt_stack->cap;
+	pt = (t_uint *)&pt_stack->cap;
 	*pt = cap;
 }
 
-void	_stack_setsize(t_stack *pt_stack, unsigned int size)
+void	_stack_setsize(t_stack *pt_stack, t_uint size)
 {
-	unsigned int	*pt;
+	t_uint	*pt;
 
-	pt = (unsigned int *)&pt_stack->size;
+	pt = (t_uint *)&pt_stack->size;
 	*pt = size;
 	_update_index(pt_stack);
 }

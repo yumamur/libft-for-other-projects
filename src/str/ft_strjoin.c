@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/libft.h"
+#include "libft.h"
 
-char	*ft_strjoin(const char *s1, const char *s2)
+char	*ft_strjoin(t_c_char *s1, t_c_char *s2)
 {
 	size_t	l1;
 	size_t	l2;
@@ -22,7 +22,7 @@ char	*ft_strjoin(const char *s1, const char *s2)
 		return (NULL);
 	l1 = ft_strlen(s1);
 	l2 = ft_strlen(s2);
-	r = (char *)malloc((l1 + l2 + 1) * sizeof(*s1));
+	r = malloc(l1 + l2 + 1);
 	if (!r)
 		return (NULL);
 	while (*s1 != '\0')

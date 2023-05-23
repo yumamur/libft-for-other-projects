@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/libft.h"
+#include "libft.h"
 
-char	*ft_strcdup(const char *s, int c)
+char	*ft_strcdup(t_c_char *s, int c)
 {
 	char	*pt;
 
@@ -22,11 +22,11 @@ char	*ft_strcdup(const char *s, int c)
 	return (ft_strndup(s, pt - s));
 }
 
-char	*ft_strndup(const char *s, unsigned long n)
+char	*ft_strndup(t_c_char *s, t_ulong n)
 {
-	char			*ret;
-	unsigned long	len;
-	unsigned long	i;
+	char	*ret;
+	t_ulong	len;
+	t_ulong	i;
 
 	len = ft_strlen(s);
 	if (n > len)
@@ -48,7 +48,7 @@ char	*ft_strndup(const char *s, unsigned long n)
 	return (ret);
 }
 
-char	*ft_strdup(const char *s)
+char	*ft_strdup(t_c_char *s)
 {
 	char	*ret;
 	int		i;

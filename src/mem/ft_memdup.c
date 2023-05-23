@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/memft.h"
+#include "memft.h"
 
-void	*ft_memdup(const void *mem, size_t n)
+void	*ft_memdup(t_c_void *mem, size_t n)
 {
 	void	*ret;
 
@@ -23,7 +23,7 @@ void	*ft_memdup(const void *mem, size_t n)
 	return (ret);
 }
 
-void	*ft_memdup_rev(const void *mem, size_t n)
+void	*ft_memdup_rev(t_c_void *mem, size_t n)
 {
 	void	*ret;
 
