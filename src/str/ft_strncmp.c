@@ -24,5 +24,5 @@ int	ft_strncmp(t_c_char *s1, t_c_char *s2, size_t n)
 	}
 	if (n == 0)
 		return (0);
-	return ((t_uchar )*s1 - (t_uchar )*s2);
+	return (*(t_uchar *)s1 - *(t_uchar *)s2);
 }

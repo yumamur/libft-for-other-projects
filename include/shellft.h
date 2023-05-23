@@ -39,5 +39,5 @@ char		*ft_file_name(char *path);
 t_c_char	*ft_getenv(t_c_char *envp[], t_c_char *name);
 ssize_t		ft_envvar_namelen(t_c_char *pt);
 int			ft_shell_var(int fd, t_c_char *buf, t_c_char *envp[]);
-t_cmdsub	*_cmdsub_parse(t_c_char *buf);
+int			ft_shell_cmdsub(int fd, t_c_char *buf, t_c_char *envp[]);
 #endif

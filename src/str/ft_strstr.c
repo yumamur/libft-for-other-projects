@@ -38,10 +38,10 @@ char	*ft_strnstr(t_c_char *haystack, t_c_char *needle, size_t len)
 	return (NULL);
 }
 
-int	ft_strnstr_pt(t_c_char *buf, t_c_char *str, size_t len, t_c_char *pt)
+int	ft_strnstr_pt(t_c_char *buf, t_c_char *str, size_t len, t_c_char **pt)
 {
-	pt = ft_strnstr(buf, str, len);
-	if (!pt)
+	*pt = ft_strnstr(buf, str, len);
+	if (!*pt)
 		return (0);
 	return (1);
 }
@@ -70,9 +70,9 @@ char	*ft_strstr(t_c_char *haystack, t_c_char *needle)
 	return (NULL);
 }
 
-int	ft_strstr_pt(t_c_char *buf, t_c_char *str, t_c_char *pt)
+int	ft_strstr_pt(t_c_char *buf, t_c_char *str, t_c_char **pt)
 {
-	pt = ft_strstr(buf, str);
+	*pt = ft_strstr(buf, str);
 	if (!pt)
 		return (0);
 	return (1);

@@ -40,6 +40,7 @@ typedef struct s_cmdsub
 
 t_cmdsub	*__set_return(t_cmdsub *cmd);
 int			__set_errno(t_cmdsub *cmd, int num);
-int			__cmdsub_init(t_cmdsub *pt, t_c_char *buf);
+int			__cmdsub_init(t_cmdsub **pt, t_c_char *buf);
+t_cmdsub	*_cmdsub_parse(t_c_char *buf);
 
 #endif

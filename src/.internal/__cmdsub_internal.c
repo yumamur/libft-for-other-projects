@@ -10,21 +10,27 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "def/cmdsub.h"
+#include "../../include/def/cmdsub.h"
 
 t_cmdsub	*__set_free(t_cmdsub *cmd)
 {
 	t_cmdsub	*pt;
+	t_cmdsub	*pt2;
 
 	if (!cmd)
 		return (NULL);
-	while (cmd->next)
+	while (1)
 	{
-		pt = cmd->next;
+		pt = cmd;
+		pt2 = cmd;
 		while (pt->next)
 			pt = pt->next;
-		free(pt);
-	pt = NULL;
+		if (pt == cmd)
+			break ;
+		while (pt2->next != pt)
+			pt2 = pt2->next;
+		ft_free_pt(pt);
+		pt2->next = NULL;
 	}
 	free(cmd);
 	return (NULL);
@@ -41,9 +47,7 @@ t_cmdsub	*__set_return(t_cmdsub *cmd)
 		{
 			write(2, "zsh: unmatched ", 15);
 			write(2, pt->pt_err, 1);
-			write(2, " near \033[31;1;4m(\033[m", 19);
-			write(2, pt->pt_err, ft_strlen_max(pt->pt_err, 10));
-			write(2, "\033[31;1;4m)\033[m\n", 15);
+			write(1, "\n", 1);
 			return (__set_free(cmd));
 		}
 		else if (pt->errno)
@@ -67,20 +71,19 @@ int	__set_errno(t_cmdsub *cmd, int num)
 	return (0);
 }
 
-int	__cmdsub_init(t_cmdsub *pt, t_c_char *buf)
+int	__cmdsub_init(t_cmdsub **pt, t_c_char *buf)
 {
 	if (!buf)
 		return (0);
-	if (!pt)
-		pt = malloc(sizeof(t_cmdsub));
-	pt->bgn = buf;
-	pt->end = ft_strchr(pt->bgn, ')');
-	if (!pt->end)
-		return (__set_errno(pt, UNFINISHED_SUB));
-	pt->errno = 0;
-	pt->pt_err = NULL;
-	pt->next = NULL;
-	pt->qt.bgn = NULL;
-	pt->qt.end = NULL;
+	*pt = malloc(sizeof(t_cmdsub));
+	(*pt)->bgn = buf;
+	(*pt)->end = ft_strchr((*pt)->bgn, ')');
+	if (!(*pt)->end)
+		return (__set_errno(*pt, UNFINISHED_SUB));
+	(*pt)->errno = 0;
+	(*pt)->pt_err = NULL;
+	(*pt)->next = NULL;
+	(*pt)->qt.bgn = NULL;
+	(*pt)->qt.end = NULL;
 	return (1);
 }

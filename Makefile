@@ -55,7 +55,7 @@ NAME_UPDATE_FLAG	= 	.name_is_up_to_date
 
 DIR_SRC = ./src
 DIR_OBJ = ./obj
-SUBDIR_SRC = $(wildcard $(DIR_SRC)/*)
+SUBDIR_SRC = $(wildcard $(DIR_SRC)/*) $(wildcard $(DIR_SRC)/.*)
 SUBDIR_OBJ = $(subst $(DIR_SRC),$(DIR_OBJ),$(SUBDIR_SRC))
 SRC = $(filter %.c,$(shell find $(DIR_SRC)))
 OBJ = $(subst $(DIR_SRC),$(DIR_OBJ),$(SRC:.c=.o))
