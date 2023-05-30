@@ -18,8 +18,8 @@
 
 # include "../libft.h"
 
-# ifndef SHELL_STRUCTS
-#  define SHELL_STRUCTS
+# ifndef SHELLFT_STRUCTS
+#  define SHELLFT_STRUCTS
 
 typedef struct s_quote
 {
@@ -38,9 +38,8 @@ typedef struct s_cmdsub
 }	t_cmdsub;
 # endif
 
-t_cmdsub	*__set_return(t_cmdsub *cmd);
-int			__set_errno(t_cmdsub *cmd, int num);
-int			__cmdsub_init(t_cmdsub **pt, t_c_char *buf);
-t_cmdsub	*_cmdsub_parse(t_c_char *buf);
+char	*__set_return(t_cmdsub **cmd);
+int		__set_errno(t_cmdsub *cmd, int num);
+int		__cmdsub_init(t_cmdsub **pt, t_c_char *buf);
 
 #endif

@@ -18,7 +18,11 @@ static void	if_quote_matches(t_cmdsub *cmd, t_c_char *p, int c, t_ulint l)
 	if (cmd->qt.bgn)
 		cmd->qt.end = ft_strchr(cmd->qt.bgn + 1, c);
 	if (!cmd->qt.end)
+	{
 		cmd->pt_err = cmd->qt.bgn;
+		cmd->qt.bgn = NULL;
+		__set_errno(cmd, UNMATCHED_QT);
+	}
 }
 
 static int	find_quotes(t_cmdsub *cmd, t_quote *qt)
@@ -57,10 +61,10 @@ static int	mark_quote(t_cmdsub *cmd, t_quote *qt)
 	if (!cmd->end)
 		return (__set_errno(cmd, UNFINISHED_SUB));
 	fin = find_quotes(cmd, qt);
+	if (cmd->errno)
+		return (__set_errno(cmd, UNMATCHED_QT));
 	if (!fin)
 		return (1);
-	if (cmd->pt_err)
-		return (__set_errno(cmd, UNMATCHED_QT));
 	if (qt->end > cmd->end)
 	{
 		cmd->end = ft_strchr(qt->end, ')');
@@ -99,31 +103,31 @@ static int	fix_paranthesis(t_cmdsub *cmd)
 	return (1);
 }
 
-t_cmdsub	*_cmdsub_parse(t_c_char *buf)
+char	*ft_shell_cmdsub(t_c_char *buf)
 {
 	t_cmdsub	*cmd;
 	t_cmdsub	*cur;
 	t_c_char	*n_sub;
 
 	if (!__cmdsub_init(&cmd, buf))
-		return (__set_return(cmd));
+		return (__set_return(&cmd));
 	cur = cmd;
 	if (!mark_quote(cmd, &cmd->qt))
-		return (__set_return(cmd));
+		return (__set_return(&cmd));
 	while (ft_strnstr_pt(cur->bgn + 2, "$(", cmd->end - cur->bgn - 2, &n_sub))
 	{
 		__cmdsub_init(&(cur->next), n_sub);
 		cur = cur->next;
-		mark_quote(cur, &cur->qt);
-		if (cur->errno)
-			break ;
+		if (!mark_quote(cur, &cur->qt))
+			return (__set_return(&cmd));
 		fix_paranthesis(cmd);
 	}
 	cur = cmd;
 	while (cur)
-	{
-		mark_quote(cur, &cur->qt);
+		if (!mark_quote(cur, &cur->qt))
+			return (__set_return(&cmd));
+	else
 		cur = cur->next;
-	}
-	return (__set_return(cmd));
+	__set_return(&cmd);
+	return (ft_strndup(cmd->bgn, cmd->end - cmd->bgn + 1));
 }
