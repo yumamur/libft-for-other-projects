@@ -26,11 +26,11 @@ typedef struct s_stack
 	t_c_ulint	index;
 	t_c_ulong	_type;
 }	t_stack;
-# endif
+# endif /* _STRUCT_STACK */
 
 void	_update_index(t_stack *pt_stack);
 void	_stack_delone(t_stack *pt_stack);
 void	_stack_settype(t_stack *pt_stack, t_ulong _type);
 void	_stack_setcap(t_stack *pt_stack, t_uint cap);
 void	_stack_setsize(t_stack *pt_stack, t_uint size);
-#endif
+#endif /* STACKFT_INTERNAL_H */

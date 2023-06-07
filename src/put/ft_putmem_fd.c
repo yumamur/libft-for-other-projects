@@ -15,7 +15,7 @@
 /*	Print 'n' bytes in binary to given fd, seperated by given 'sep'. Prints
  *	a single line, if no 'sep' is given.
  */
-void	ft_putmem_fd(int fd, void *mem, size_t n, t_c_char *sep)
+void	ft_putmem_fd(int fd, const void *mem, size_t n, t_c_char *sep)
 {
 	int		shift;
 	size_t	i;
