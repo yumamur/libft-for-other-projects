@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "stackft.h"
-#include "def/stackft_internal.h"
+#include "internal/stack_utils.h"
 
 void	*ft_stack_pop(t_stack *pt_stack)
 {

@@ -1,20 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_stack_clear.c                                   :+:      :+:    :+:   */
+/*   ft_stack_call.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yumamur <yumamur@student.42istanbul.com.t  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/14 15:46:44 by yumamur           #+#    #+#             */
-/*   Updated: 2023/05/14 15:47:33 by yumamur          ###   ########.fr       */
+/*   Created: 2023/06/08 05:42:50 by yumamur           #+#    #+#             */
+/*   Updated: 2023/06/08 05:42:51 by yumamur          ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/* ************************************************************************** *
 
-#include "stackft.h"
-#include "internal/stack_utils.h"
+#include "../../include/stackft.h"
 
-void	ft_stack_clear(t_stack *pt_stack)
+int	ft_stack_call(t_stack *stack, void *(fnc))
 {
-	while (pt_stack->size)
-		_stack_delone(pt_stack);
-}
+	if (!stack || !fnc)
+		return (-1);
+	if (fnc == ft_stack_init)
+	{
+
+	}
+}*/

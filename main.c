@@ -4,10 +4,10 @@
 int	main(void)
 {
 	t_stack	st;
-	char	a1;
-	char	a2;
-	char	a3;
-	char	a4;
+	int	a1;
+	int	a2;
+	int	a3;
+	int	a4;
 
 	a1 = 1;
 	a2 = 2;
@@ -18,8 +18,8 @@ int	main(void)
 	ft_stack_push(&st, &a2);
 	ft_stack_push(&st, &a3);
 	ft_stack_push(&st, &a4);
-	ft_putmem_fd(1, st.data, 4, "\n");
+	ft_putmem_fd(1, st.data, 20, "\n");
 	ft_putstr("\n");
 	ft_stack_nshift_down(&st, 2);
-	ft_putmem_fd(1, st.data, 4, "\n");
+	ft_putmem_fd(1, st.data, 20, "\n");
 }

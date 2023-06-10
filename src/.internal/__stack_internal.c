@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "def/stackft_internal.h"
+#include "internal/stack_utils.h"
 
 void	_update_index(t_stack *pt_stack)
 {

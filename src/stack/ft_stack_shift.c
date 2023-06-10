@@ -15,10 +15,10 @@
 void	ft_stack_shift_up(t_stack *stack)
 {
 	void	*tmp;
-	t_uint	ct;
 	char	*i;
+	t_uint	ct;
 
-	if (!stack || !stack->data || !stack->_type)
+	if (!stack || !stack->data || !stack->_type || !stack->size)
 		return ;
 	tmp = malloc(stack->_type);
 	ft_memcpy(tmp, stack->data, stack->_type);
@@ -35,10 +35,10 @@ void	ft_stack_shift_up(t_stack *stack)
 void	ft_stack_shift_down(t_stack *stack)
 {
 	void	*tmp;
-	t_uint	ct;
 	char	*i;
+	t_uint	ct;
 
-	if (!stack || !stack->data || !stack->_type)
+	if (!stack || !stack->data || !stack->_type || !stack->size)
 		return ;
 	tmp = malloc(stack->_type);
 	ft_memcpy(tmp, stack->data + stack->index, stack->_type);
@@ -54,12 +54,16 @@ void	ft_stack_shift_down(t_stack *stack)
 
 void	ft_stack_nshift_up(t_stack *stack, t_uint n)
 {
+	if (!n || !stack || !stack->data || !stack->_type || !stack->size)
+		return ;
 	while (n--)
 		ft_stack_shift_up(stack);
 }
 
 void	ft_stack_nshift_down(t_stack *stack, t_uint n)
 {
+	if (!n || !stack || !stack->data || !stack->_type || !stack->size)
+		return ;
 	while (n--)
 		ft_stack_shift_down(stack);
 }

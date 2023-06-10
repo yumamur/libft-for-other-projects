@@ -10,10 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef STACKFT_INTERNAL_H
-# define STACKFT_INTERNAL_H
+#ifndef STACK_UTILS_H
+# define STACK_UTILS_H
 
-# include "typeft.h"
+# include "../def/typeft.h"
 
 # ifndef _STRUCT_STACK
 #  define _STRUCT_STACK

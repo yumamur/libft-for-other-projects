@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "def/cmdsub.h"
+#include "internal/cmdsub.h"
 
 void	*__set_free(t_cmdsub **cmd)
 {
