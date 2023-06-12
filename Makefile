@@ -29,12 +29,12 @@ CL_END		= \033[m
 ##          ##
 ##############
 
-RM		= /usr/bin/rm -rf
-archive	= /usr/bin/ar -rcs $(NAME) $(OBJ); \
-		  /usr/bin/ranlib $(NAME)
+RM		= rm -rf
+archive	= ar -rcs $(NAME) $(OBJ); \
+		  ranlib $(NAME)
 
-CC		= /usr/bin/clang
-CFLAGS	= -Wall -Werror -Wextra
+CC		= clang
+CFLAGS	= -Wall -Werror -Wextra -fsanitize=address
 
 
 #############
@@ -98,7 +98,7 @@ $(OBJ): $(SRC) | $(OBJ_DIRS_FLAG)
 		for f in $(SRC); do \
 			obj="$$(echo $$f | sed 's|$(DIR_SRC)|$(DIR_OBJ)|;s|\.c|\.o|')"; \
 			$(CC) $(CFLAGS) $(INCLUDE) -c "$$f" -o "$$obj" \
-				|| { printf "\n$(TITLE) Compilation failed for $(FG_RED)$(BOLD)$$f$(CL_END), check your code.\n\n"; rm -rf .rebuild; make -s fclean; exit 1; }; \
+				|| { printf "\n$(TITLE) Compilation failed for $(FG_RED)$(BOLD)$$f$(CL_END), check your code.\n" >&2; rm -rf .rebuild; make -s fclean; exit 127; }; \
 			n=$$(($$n+1)); \
 			printf "$(TITLE) Compiled files: $$n\033[K\r"; \
 		done; \
