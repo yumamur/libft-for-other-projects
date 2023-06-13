@@ -12,12 +12,11 @@
 
 #include "stackft.h"
 
-void	ft_stack_destroy(t_stack *stack)
+void	ft_stack_destroy(t_stack **stack)
 {
-	if (!stack)
+	if (!stack || !*stack)
 		return ;
-	ft_stack_clear(stack);
-	if (stack->data)
-		free((void *)stack->data);
-	free(stack);
+	if ((*stack)->data)
+		free((void *)(*stack)->data);
+	free(*stack);
 }

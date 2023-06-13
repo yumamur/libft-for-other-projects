@@ -27,4 +27,5 @@ void	ft_stack_init(t_stack *stack, t_uint cap, t_ulong _type)
 	_stack_setcap(stack, cap);
 	_stack_setsize(stack, 0);
 	stack->data = malloc(cap * stack->_type);
+	ft_bzero((void *)stack->data, cap * stack->_type);
 }

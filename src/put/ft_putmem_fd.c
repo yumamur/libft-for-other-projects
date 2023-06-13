@@ -36,5 +36,5 @@ void	ft_putmem_fd(int fd, const void *mem, size_t n, t_c_char *sep)
 		if (sep && i < n)
 			write(fd, sep, ft_strlen(sep));
 	}
-//	write(fd, "\n", 1);
+	write(fd, "\n", 1);
 }

@@ -36,7 +36,7 @@ void	ft_stack_xpanda(t_stack *stack, t_uint n);
 void	ft_stack_push(t_stack *stack, void *val);
 void	*ft_stack_pop(t_stack *stack);
 void	ft_stack_clear(t_stack *stack);
-void	ft_stack_destroy(t_stack *stack);
+void	ft_stack_destroy(t_stack **stack);
 void	ft_stack_shift_up(t_stack *stack);
 void	ft_stack_nshift_up(t_stack *stack, t_uint n);
 void	ft_stack_shift_down(t_stack *stack);
