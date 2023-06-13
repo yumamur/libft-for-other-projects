@@ -31,13 +31,17 @@ typedef struct s_stack
 
 /* It is recommended to set _type parameter using the macro 'sizeof()'.
  * */
-void	ft_stack_init(t_stack *pt, t_uint cap, t_ulong _type);
-void	ft_stack_xpanda(t_stack *pt_stack, t_uint n);
-void	ft_stack_push(t_stack *pt_stack, void *val);
-void	*ft_stack_pop(t_stack *pt_stack);
-void	ft_stack_clear(t_stack *pt_stack);
+void	ft_stack_init(t_stack *stack, t_uint cap, t_ulong _type);
+void	ft_stack_xpanda(t_stack *stack, t_uint n);
+void	ft_stack_push(t_stack *stack, void *val);
+void	*ft_stack_pop(t_stack *stack);
+void	ft_stack_clear(t_stack *stack);
+void	ft_stack_destroy(t_stack *stack);
 void	ft_stack_shift_up(t_stack *stack);
 void	ft_stack_nshift_up(t_stack *stack, t_uint n);
 void	ft_stack_shift_down(t_stack *stack);
 void	ft_stack_nshift_down(t_stack *stack, t_uint n);
+void	ft_stack_swap_bottom(t_stack *st1, t_stack *st2);
+void	ft_stack_swap_top(t_stack *st1, t_stack *st2);
+int		ft_stack_valid(t_stack *stack, char mode);
 #endif /* STACKFT_H */

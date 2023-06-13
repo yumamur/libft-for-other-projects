@@ -13,16 +13,16 @@
 #include "stackft.h"
 #include "internal/stack_utils.h"
 
-void	*ft_stack_pop(t_stack *pt_stack)
+void	*ft_stack_pop(t_stack *stack)
 {
 	void	*pt;
 
-	if (!pt_stack || !pt_stack->data || !pt_stack->size)
+	if (!stack || !stack->data || !stack->size)
 	{
 		write(2, "\nNo data to pop\n", 16);
 		return (NULL);
 	}
-	pt = ft_memdup(&(pt_stack->data[pt_stack->index]), pt_stack->_type);
-	_stack_delone(pt_stack);
+	pt = ft_memdup(&(stack->data[stack->index]), stack->_type);
+	_stack_delone(stack);
 	return (pt);
 }

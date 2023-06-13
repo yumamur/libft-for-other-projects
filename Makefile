@@ -8,18 +8,16 @@ TITLE = $(FG_GREEN)$(BOLD)[LIBFT]$(CL_END)
 ##############
 
 BOLD		= \033[1m
-FG_RED		= \033[38;2;250;0;20m
-FG_GREEN	= \033[38;2;20;250;0m
-FG_BLUE		= \033[38;2;0;80;250m
-FG_PURPLE	= \033[38;2;200;10;200m
-FG_YELLOW	= \033[38;2;10;240;240m
-FG_ORANGE	= \033[38;2;255;150;0m
-BG_RED		= \033[38;2;250;0;20m
-BG_GREEN	= \033[38;2;20;250;0m
-BG_BLUE		= \033[38;2;0;80;250m
-BG_PURPLE	= \033[38;2;200;10;200m
-BG_YELLOW	= \033[38;2;10;240;240m
-BG_ORANGE	= \033[38;2;255;150;0m
+FG_RED		= \033[31m
+FG_GREEN	= \033[32m
+FG_YELLOW	= \033[33m
+FG_BLUE		= \033[34m
+FG_PURPLE	= \033[35m
+BG_RED		= \033[41m
+BG_GREEN	= \033[42m
+BG_YELLOW	= \033[43m
+BG_BLUE		= \033[44m
+BG_PURPLE	= \033[45m
 CL_END		= \033[m
 
 
@@ -30,11 +28,10 @@ CL_END		= \033[m
 ##############
 
 RM		= rm -rf
-archive	= ar -rcs $(NAME) $(OBJ); \
-		  ranlib $(NAME)
+archive	= ar -rcs $(NAME) $(OBJ)
 
 CC		= clang
-CFLAGS	= -Wall -Werror -Wextra -fsanitize=address
+CFLAGS	= -Wall -Werror -Wextra #-fsanitize=address
 
 
 #############

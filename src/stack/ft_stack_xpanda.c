@@ -13,20 +13,20 @@
 #include "stackft.h"
 #include "internal/stack_utils.h"
 
-void	ft_stack_xpanda(t_stack *pt_stack, t_uint n)
+void	ft_stack_xpanda(t_stack *stack, t_uint n)
 {
 	void	*buf;
 	t_uint	*pt;
 
-	if (!pt_stack || !n || !pt_stack->data)
+	if (!stack || !n || !stack->data)
 		return ;
-	pt = (t_uint *)&(pt_stack->cap);
+	pt = (t_uint *)&(stack->cap);
 	*pt += n;
-	buf = malloc(pt_stack->cap * pt_stack->_type);
-	buf = ft_memcpy(buf, pt_stack->data, pt_stack->size * pt_stack->_type);
+	buf = malloc(stack->cap * stack->_type);
+	buf = ft_memcpy(buf, stack->data, stack->size * stack->_type);
 	if (!buf)
 		return ;
-	free((void *)pt_stack->data);
-	pt_stack->data = buf;
+	free((void *)stack->data);
+	stack->data = buf;
 	buf = NULL;
 }

@@ -1,20 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_stack_clear.c                                   :+:      :+:    :+:   */
+/*   ft_stack_destroy.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yumamur <yumamur@student.42istanbul.com.t  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/14 15:46:44 by yumamur           #+#    #+#             */
-/*   Updated: 2023/05/14 15:47:33 by yumamur          ###   ########.fr       */
+/*   Created: 2023/06/13 16:47:03 by yumamur           #+#    #+#             */
+/*   Updated: 2023/06/13 16:47:04 by yumamur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "stackft.h"
-#include "internal/stack_utils.h"
 
-void	ft_stack_clear(t_stack *stack)
+void	ft_stack_destroy(t_stack *stack)
 {
-	while (stack->size)
-		_stack_delone(stack);
+	if (!stack)
+		return ;
+	ft_stack_clear(stack);
+	if (stack->data)
+		free((void *)stack->data);
+	free(stack);
 }

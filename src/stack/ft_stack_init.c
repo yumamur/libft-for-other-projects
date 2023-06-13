@@ -13,12 +13,18 @@
 #include "stackft.h"
 #include "internal/stack_utils.h"
 
-void	ft_stack_init(t_stack *pt_stack, t_uint cap, t_ulong _type)
+void	ft_stack_init(t_stack *stack, t_uint cap, t_ulong _type)
 {
-	if (!pt_stack || !cap || !_type)
+	if (!stack || !cap || !_type)
+	{
+		if (stack->data)
+			free((void *)stack->data);
+		else
+			stack->data = NULL;
 		return ;
-	_stack_settype(pt_stack, _type);
-	_stack_setcap(pt_stack, cap);
-	_stack_setsize(pt_stack, 0);
-	pt_stack->data = malloc(cap * pt_stack->_type);
+	}
+	_stack_settype(stack, _type);
+	_stack_setcap(stack, cap);
+	_stack_setsize(stack, 0);
+	stack->data = malloc(cap * stack->_type);
 }

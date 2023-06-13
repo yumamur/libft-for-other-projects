@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/stackft.h"
+#include "stackft.h"
 
 void	ft_stack_shift_up(t_stack *stack)
 {
