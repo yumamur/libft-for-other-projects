@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_atol.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yumamur <yumamur@student.42istanbul.com.t  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/01 22:57:00 by yumamur           #+#    #+#             */
-/*   Updated: 2023/05/01 22:57:01 by yumamur          ###   ########.fr       */
+/*   Created: 2023/06/14 21:18:20 by yumamur           #+#    #+#             */
+/*   Updated: 2023/06/14 21:18:24 by yumamur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "def/typeft.h"
 
-int	ft_atoi(t_c_char *str)
+long	ft_atol(t_c_char *str)
 {
-	int		ret;
+	long	ret;
 	char	sign;
 
 	sign = 1;
@@ -32,9 +32,9 @@ int	ft_atoi(t_c_char *str)
 	return (ret * sign);
 }
 
-int	ft_atoi_no_ws(t_c_char *str)
+long	ft_atol_no_ws(t_c_char *str)
 {
-	int		ret;
+	long	ret;
 	char	sign;
 
 	sign = 1;
@@ -49,3 +49,4 @@ int	ft_atoi_no_ws(t_c_char *str)
 	}
 	return (ret * sign);
 }
+

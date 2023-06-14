@@ -34,6 +34,9 @@ int		ft_isprint(int c);
 
 /* CONVERTION */
 int		ft_atoi(t_c_char *str);
+int		ft_atoi_no_ws(t_c_char *str);
+long	ft_atol(t_c_char *str);
+long	ft_atol_no_ws(t_c_char *str);
 char	*ft_itoa(int n);
 
 /* STRING */
