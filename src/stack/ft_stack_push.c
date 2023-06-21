@@ -6,37 +6,29 @@
 /*   By: yumamur <yumamur@student.42istanbul.com.t  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 15:47:27 by yumamur           #+#    #+#             */
-/*   Updated: 2023/05/19 16:01:25 by yumamur          ###   ########.fr       */
+/*   Updated: 2023/06/17 20:04:41 by yumamur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "stackft.h"
-#include "internal/stack_utils.h"
+#include "../../include/stackft.h"
+#include "../../include/internal/stack_utils.h"
 
-void	ft_stack_push(t_stack *stack, void *val)
+int	ft_stack_push(t_stack *st, void *val)
 {
 	static char	ctl;
 
-	if (!stack)
-	{
-		write(2, "\nNo stack initialized\n", 22);
-		return ;
-	}
+	if (!st)
+		return (-1);
 	if (!ctl)
 		ctl = 0;
-	if (stack->size == stack->cap)
+	if (st->size == st->cap)
 	{
-		ctl++;
-		write(2, "\nStack is full, consider ft_stack_xpanda.\n", 42);
-		if (ctl < 3)
-			ft_stack_xpanda(stack, 1);
+		if (ctl++ < 3)
+			ft_stack_xpanda(st, 1);
 		else
-		{
-			write(2, "\nIncrease cap reached. Check your code.\n", 40);
-			return ;
-		}
+			return (-1);
 	}
-	_stack_setsize(stack, stack->size + 1);
-	ft_memcpy((char *)&((stack->data)[stack->index]),
-		val, stack->_type);
+	_stack_setsize(st, st->size + 1);
+	ft_memcpy((char *)&((st->data)[st->index]), val, st->_type);
+	return (0);
 }

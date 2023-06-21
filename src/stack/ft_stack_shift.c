@@ -10,60 +10,50 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "stackft.h"
+#include "../../include/stackft.h"
 
-void	ft_stack_shift_up(t_stack *stack)
+int	ft_stack_shift_nup(t_stack *stack, t_uint n)
 {
-	void	*tmp;
+	char	tmp[MAX_TYPE_SIZE];
 	char	*i;
 	t_uint	ct;
 
-	if (!stack || !stack->data || !stack->_type || !stack->size)
-		return ;
-	tmp = malloc(stack->_type);
-	ft_memcpy(tmp, stack->data, stack->_type);
-	ct = stack->size - 1;
-	i = (char *)stack->data;
-	while (ct--)
+	if (!n || !ft_stack_valid(stack, 1))
+		return (-1);
+	while (n--)
 	{
-		ft_memcpy(i, i + stack->_type, stack->_type);
-		i += stack->_type;
+		ft_memcpy(tmp, stack->data, stack->_type);
+		ct = stack->size - 1;
+		i = (char *)stack->data;
+		while (ct--)
+		{
+			ft_memcpy(i, i + stack->_type, stack->_type);
+			i += stack->_type;
+		}
+		ft_memcpy(i, tmp, stack->_type);
 	}
-	ft_memcpy(i, tmp, stack->_type);
+	return (0);
 }
 
-void	ft_stack_shift_down(t_stack *stack)
+int	ft_stack_shift_ndown(t_stack *stack, t_uint n)
 {
-	void	*tmp;
+	char	tmp[MAX_TYPE_SIZE];
 	char	*i;
 	t_uint	ct;
 
-	if (!stack || !stack->data || !stack->_type || !stack->size)
-		return ;
-	tmp = malloc(stack->_type);
-	ft_memcpy(tmp, stack->data + stack->index, stack->_type);
-	ct = stack->size - 1;
-	i = (char *)&stack->data[stack->index];
-	while (ct--)
+	if (!n || !ft_stack_valid(stack, 1))
+		return (-1);
+	while (n--)
 	{
-		ft_memcpy(i, i - stack->_type, stack->_type);
-		i -= stack->_type;
+		ft_memcpy(tmp, stack->data + stack->index, stack->_type);
+		ct = stack->size - 1;
+		i = (char *)&stack->data[stack->index];
+		while (ct--)
+		{
+			ft_memcpy(i, i - stack->_type, stack->_type);
+			i -= stack->_type;
+		}
+		ft_memcpy(i, tmp, stack->_type);
 	}
-	ft_memcpy(i, tmp, stack->_type);
-}
-
-void	ft_stack_nshift_up(t_stack *stack, t_uint n)
-{
-	if (!n || !stack || !stack->data || !stack->_type || !stack->size)
-		return ;
-	while (n--)
-		ft_stack_shift_up(stack);
-}
-
-void	ft_stack_nshift_down(t_stack *stack, t_uint n)
-{
-	if (!n || !stack || !stack->data || !stack->_type || !stack->size)
-		return ;
-	while (n--)
-		ft_stack_shift_down(stack);
+	return (0);
 }

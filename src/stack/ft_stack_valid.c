@@ -6,7 +6,7 @@
 /*   By: yumamur <yumamur@student.42istanbul.com.t  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 12:29:23 by yumamur           #+#    #+#             */
-/*   Updated: 2023/06/13 12:29:24 by yumamur          ###   ########.fr       */
+/*   Updated: 2023/06/17 20:05:57 by yumamur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,20 @@
 
 int	ft_stack_valid(t_stack *stack, char mode)
 {
+	if (!stack)
+		return (-1);
 	if (mode)
-		return ((stack->data && stack->_type && stack->size));
+	{
+		if (stack->data && stack->_type && stack->size)
+			return (0);
+		else
+			return (-1);
+	}
 	else
-		return ((stack->data && stack->_type && stack->cap));
+	{
+		if (stack->data && stack->_type && stack->cap)
+			return (0);
+		else
+			return (-1);
+	}
 }

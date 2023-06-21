@@ -44,6 +44,17 @@ OBJ_DIRS_FLAG		=	.obj_dirs_created
 NAME_UPDATE_FLAG	= 	.name_is_up_to_date
 
 
+#################
+##             ##
+#   STACK_VIS   #
+##             ##
+#################
+
+STACK_VIS = stack_vis
+DIR_STACK_TEST = ./src/stack/visualizer
+STACK_TEST = $(wildcard $(DIR_STACK_TEST)/*)
+
+
 #############
 ##         ##
 #   FILES   #
@@ -54,7 +65,7 @@ DIR_SRC = ./src
 DIR_OBJ = ./obj
 SUBDIR_SRC = $(wildcard $(DIR_SRC)/*) $(wildcard $(DIR_SRC)/.*)
 SUBDIR_OBJ = $(subst $(DIR_SRC),$(DIR_OBJ),$(SUBDIR_SRC))
-SRC = $(filter %.c,$(shell find $(DIR_SRC)))
+SRC = $(filter-out $(STACK_TEST),$(filter %.c, $(shell find $(DIR_SRC))))
 OBJ = $(subst $(DIR_SRC),$(DIR_OBJ),$(SRC:.c=.o))
 INCLUDE = -I ./include
 
@@ -109,14 +120,26 @@ $(OBJ_DIRS_FLAG):
 $(NAME_UPDATE_FLAG):
 	@touch $(NAME_UPDATE_FLAG)
 
+
+$(STACK_TEST): $(NAME)
+
 .PHONY: archive all clean fclean re
 
 all: $(NAME)
 
 clean:
-	@$(RM) $(DIR_OBJ)
+	@$(RM) $(DIR_OBJ) $(STACK_VIS)
 
 fclean: clean
-	@$(RM) $(NAME) $(OBJ_DIRS_FLAG) $(NAME_UPDATE_FLAG)
+	@$(RM) $(NAME) $(OBJ_DIRS_FLAG) $(NAME_UPDATE_FLAG) $(STACK_VIS)
 
 re: fclean all
+
+stacktest: $(STACK_TEST)
+	@if [ -e $(STACK_VIS) ]; then \
+		printf "$(TITLE) $(STACK_VIS) is existing."; \
+	else \
+		printf "$(TITLE) Building the $(FG_YELLOW)$(BOLD)$(STACK_VIS)$(CL_END) executable.\n"; \
+		$(CC) $(CFLAGS) $(STACK_TEST) $(NAME) -o $(STACK_VIS); \
+		printf "$(TITLE) Done.\n"; \
+	fi

@@ -32,9 +32,8 @@ void	ft_putnbr_fd(int fd, int n)
 		}
 		else
 		{
-			ft_putnbr_fd((n / 10), fd);
-			c = (n % 10) + 48;
-			write(fd, &c, 1);
+			ft_putnbr_fd(fd, (n / 10));
+			ft_putnbr_fd(fd, (n % 10));
 		}
 	}
 }

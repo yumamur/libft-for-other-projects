@@ -49,4 +49,3 @@ long	ft_atol_no_ws(t_c_char *str)
 	}
 	return (ret * sign);
 }
-

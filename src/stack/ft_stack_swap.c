@@ -5,44 +5,24 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: yumamur <yumamur@student.42istanbul.com.t  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/13 12:17:23 by yumamur           #+#    #+#             */
-/*   Updated: 2023/06/13 12:17:24 by yumamur          ###   ########.fr       */
+/*   Created: 2023/06/20 17:37:42 by yumamur           #+#    #+#             */
+/*   Updated: 2023/06/20 17:37:43 by yumamur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "stackft.h"
+#include "../../include/stackft.h"
 
-void	ft_stack_swap_top(t_stack *st1, t_stack *st2)
+int	ft_stack_swap(t_stack *stack, t_uint i1, t_uint i2)
 {
-	void	*tmp;
+	char	tmp[MAX_TYPE_SIZE];
 
-	if (!st1 || !st2 || st1->_type != st2->_type)
-		return ;
-	if (!ft_stack_valid(st1, 1) || !ft_stack_valid(st2, 1))
-		return ;
-	tmp = malloc(st1->_type);
-	if (!tmp)
-		return ;
-	ft_memcpy(tmp, st1->data, st1->_type);
-	ft_memcpy((char *)st1->data, st2->data, st1->_type);
-	ft_memcpy((char *)st2->data, tmp, st1->_type);
-	free(tmp);
-}
-
-void	ft_stack_swap_bottom(t_stack *st1, t_stack *st2)
-{
-	void	*tmp;
-
-	if (!st1 || !st2 || st1->_type != st2->_type)
-		return ;
-	if (!ft_stack_valid(st1, 1) || !ft_stack_valid(st2, 1))
-		return ;
-	tmp = malloc(st1->_type);
-	if (!tmp)
-		return ;
-	ft_memcpy(tmp, &st1->data[st1->index], st1->_type);
-	ft_memcpy((char *)&st1->data[st1->index],
-		&st2->data[st2->index], st1->_type);
-	ft_memcpy((char *)&st2->data[st2->index], tmp, st1->_type);
-	free(tmp);
+	if (i1 == i2 || !ft_stack_valid(stack, 1) || i1 > stack->size
+		|| i2 > stack->size)
+		return (-1);
+	ft_memcpy(tmp, &stack->data[i1 * stack->_type], stack->_type);
+	ft_memcpy((void *)&stack->data[i1 * stack->_type],
+		&stack->data[i2 * stack->_type], stack->_type);
+	ft_memcpy((void *)&stack->data[i2 * stack->_type],
+		tmp, stack->_type);
+	return (0);
 }

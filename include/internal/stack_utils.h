@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   stackft_internal.h                                 :+:      :+:    :+:   */
+/*   stack_utils.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yumamur <yumamur@student.42istanbul.com.t  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 15:22:06 by yumamur           #+#    #+#             */
-/*   Updated: 2023/05/14 15:22:07 by yumamur          ###   ########.fr       */
+/*   Updated: 2023/06/17 16:24:43 by yumamur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,4 +33,5 @@ void	_stack_delone(t_stack *pt_stack);
 void	_stack_settype(t_stack *pt_stack, t_ulong _type);
 void	_stack_setcap(t_stack *pt_stack, t_uint cap);
 void	_stack_setsize(t_stack *pt_stack, t_uint size);
+int		_call_internal(void (*f)(), t_stack *st, ...);
 #endif /* STACKFT_INTERNAL_H */
