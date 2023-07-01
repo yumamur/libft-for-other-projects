@@ -22,7 +22,7 @@ static int	ft_ifexist(t_c_char c, t_c_char *ctrl)
 
 char	*ft_strtrim(t_c_char *s1, t_c_char *set)
 {
-	t_ulint	size;
+	t_ulong	size;
 	char	*pt;
 
 	if (!s1)

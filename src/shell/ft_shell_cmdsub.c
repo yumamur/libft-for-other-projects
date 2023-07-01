@@ -12,7 +12,7 @@
 
 #include "internal/cmdsub.h"
 
-static void	if_quote_matches(t_cmdsub *cmd, t_c_char *p, int c, t_ulint l)
+static void	if_quote_matches(t_cmdsub *cmd, t_c_char *p, int c, t_ulong l)
 {
 	cmd->qt.bgn = ft_memchr(p, c, l);
 	if (cmd->qt.bgn)

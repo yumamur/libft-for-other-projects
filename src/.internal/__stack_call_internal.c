@@ -19,21 +19,21 @@ int	_call_internal(void (*f)(), t_stack *st, ...)
 
 	if (!f)
 		return (0);
-	if ((void (*)(t_stack *, t_uint))f == _stack_setcap
-		|| ((void (*)(t_stack *, t_uint))f == _stack_setsize))
+	if ((int (*)(t_stack *, t_uint))f == _stack_setcap
+		|| ((int (*)(t_stack *, t_uint))f == _stack_setsize))
 	{
 		va_start(args, st);
 		f(st, va_arg(args, t_uint));
 		va_end(args);
 	}
-	else if ((void (*)(t_stack *, t_ulong))f == _stack_settype)
+	else if ((int (*)(t_stack *, t_ulong))f == _stack_settype)
 	{
 		va_start(args, st);
 		f(st, va_arg(args, t_ulong));
 		va_end(args);
 	}
-	else if ((void (*)(t_stack *))f == _stack_delone
-			|| (void (*)(t_stack *))f == _update_index)
+	else if ((int (*)(t_stack *))f == _stack_delone
+			|| (int (*)(t_stack *))f == _update_index)
 		f(st);
 	return (1);
 }

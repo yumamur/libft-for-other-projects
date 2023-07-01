@@ -17,18 +17,18 @@ typedef unsigned char		t_uchar;
 typedef unsigned short		t_ushort;
 typedef unsigned int		t_uint;
 typedef unsigned long		t_ulong;
-typedef unsigned long int	t_ulint;
+typedef unsigned long long	t_ullong;
 
 typedef const void			t_c_void;
 typedef const char			t_c_char;
 typedef const short			t_c_short;
 typedef const int			t_c_int;
 typedef const long			t_c_long;
-typedef const long int		t_c_lint;
+typedef const long long		t_c_llong;
 
 typedef const t_uchar		t_c_uchar;
 typedef const t_ushort		t_c_ushort;
 typedef const t_uint		t_c_uint;
 typedef const t_ulong		t_c_ulong;
-typedef const t_ulint		t_c_ulint;
+typedef const t_ullong		t_c_ullong;
 #endif /* TYPEFT_H */

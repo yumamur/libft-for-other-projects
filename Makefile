@@ -50,9 +50,9 @@ NAME_UPDATE_FLAG	= 	.name_is_up_to_date
 ##             ##
 #################
 
-STACK_VIS = stack_vis
-DIR_STACK_TEST = ./src/stack/visualizer
-STACK_TEST = $(wildcard $(DIR_STACK_TEST)/*)
+STACK_VIS = test_stack 
+DIR_STACK_VIS = ./stackvisualizer
+SRC_STACK_VIS = $(wildcard $(DIR_STACK_VIS)/*.c)
 
 
 #############
@@ -65,7 +65,7 @@ DIR_SRC = ./src
 DIR_OBJ = ./obj
 SUBDIR_SRC = $(wildcard $(DIR_SRC)/*) $(wildcard $(DIR_SRC)/.*)
 SUBDIR_OBJ = $(subst $(DIR_SRC),$(DIR_OBJ),$(SUBDIR_SRC))
-SRC = $(filter-out $(STACK_TEST),$(filter %.c, $(shell find $(DIR_SRC))))
+SRC = $(filter %.c, $(shell find $(DIR_SRC)))
 OBJ = $(subst $(DIR_SRC),$(DIR_OBJ),$(SRC:.c=.o))
 INCLUDE = -I ./include
 
@@ -82,7 +82,7 @@ $(NAME): $(OBJ) | $(NAME_UPDATE_FLAG)
 			printf "$(TITLE) Done rebuilding.\n"; \
 			$(RM) ./.rebuild; \
 		else \
-			printf "$(TITLE) $(NAME) is up to date.\n"; \
+			printf "$(TITLE) $(FG_GREEN)$(BOLD)$(NAME)$(CL_END) is up to date.\n"; \
 		fi; \
 	else \
 		$(call archive); \
@@ -95,7 +95,7 @@ $(OBJ): $(SRC) | $(OBJ_DIRS_FLAG)
 			if [ "$$c" -ot "$(NAME)" ]; then \
 				continue; \
 			else \
-				printf "$(TITLE) There is an update in $(FG_RED)$$c$(CL_END), rebuilding.\n"; \
+				printf "$(TITLE) There is an update in $(FG_YELLOW)$$c$(CL_END), rebuilding.\n"; \
 				touch .rebuild; \
 				make --silent re; \
 				break; \
@@ -120,8 +120,7 @@ $(OBJ_DIRS_FLAG):
 $(NAME_UPDATE_FLAG):
 	@touch $(NAME_UPDATE_FLAG)
 
-
-$(STACK_TEST): $(NAME)
+$(STACK_VIS): $(SRC_STACK_VIS) | $(NAME)
 
 .PHONY: archive all clean fclean re
 
@@ -135,11 +134,11 @@ fclean: clean
 
 re: fclean all
 
-stacktest: $(STACK_TEST)
+visstack: $(STACK_VIS) | $(NAME)
 	@if [ -e $(STACK_VIS) ]; then \
-		printf "$(TITLE) $(STACK_VIS) is existing."; \
+		$(CC) $(CFLAGS) $(INCLUDE) $(SRC_STACK_VIS) $(NAME) -o $(STACK_VIS); \
 	else \
 		printf "$(TITLE) Building the $(FG_YELLOW)$(BOLD)$(STACK_VIS)$(CL_END) executable.\n"; \
-		$(CC) $(CFLAGS) $(STACK_TEST) $(NAME) -o $(STACK_VIS); \
+		$(CC) $(CFLAGS) $(INCLUDE) $(SRC_STACK_VIS) $(NAME) -o $(STACK_VIS); \
 		printf "$(TITLE) Done.\n"; \
 	fi

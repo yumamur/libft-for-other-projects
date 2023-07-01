@@ -13,8 +13,11 @@
 #include "stackft.h"
 #include "internal/stack_utils.h"
 
-void	ft_stack_clear(t_stack *stack)
+int	ft_stack_clear(t_stack *stack)
 {
+	if (ft_stack_valid(stack, 1))
+		return (-1);
 	while (stack->size)
 		_stack_delone(stack);
+	return (0);
 }

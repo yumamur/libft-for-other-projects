@@ -15,7 +15,7 @@
 void	**ft_realloc_2pt(void **arr, size_t n)
 {
 	void	**ret;
-	t_ulint	i;
+	t_ulong	i;
 
 	if (!arr)
 		return (NULL);
