@@ -20,7 +20,7 @@
 
 typedef struct s_stack
 {
-	t_c_char	*data;
+	void		*data;
 	t_c_uint	size;
 	t_c_uint	cap;
 	t_c_ulong	index;
