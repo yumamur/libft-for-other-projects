@@ -23,7 +23,7 @@
  */
 #  define _TYPE_SIZE_MAX 128
 #  ifndef MAX_TYPE_SIZE
-#   define MAX_TYPE_SIZE 1
+#   define MAX_TYPE_SIZE 8
 #  elif MAX_TYPE_SIZE > _TYPE_SIZE_MAX
 #   undef MAX_TYPE_SIZE
 #   define MAX_TYPE_SIZE _TYPE_SIZE_MAX
@@ -31,7 +31,7 @@
 
 typedef struct s_stack
 {
-	t_c_char	*data;
+	void		*data;
 	t_c_uint	size;
 	t_c_uint	cap;
 	t_c_ulong	index;
