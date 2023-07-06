@@ -6,7 +6,7 @@
 /*   By: yumamur <yumamur@student.42istanbul.com.t  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 15:51:20 by yumamur           #+#    #+#             */
-/*   Updated: 2023/06/17 20:26:43 by yumamur          ###   ########.fr       */
+/*   Updated: 2023/07/06 16:13:38 by yumamur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ t_pop	ft_stack_pop(t_stack *st)
 {
 	t_pop	ret;
 
-	if (!ft_stack_valid(st, 1))
+	if (ft_stack_valid(st, 1))
 	{
 		ret.status = -1;
 		return (ret);
