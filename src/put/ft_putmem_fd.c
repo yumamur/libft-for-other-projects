@@ -6,7 +6,7 @@
 /*   By: yumamur <yumamur@student.42istanbul.com.t  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 23:01:20 by yumamur           #+#    #+#             */
-/*   Updated: 2023/05/01 23:01:23 by yumamur          ###   ########.fr       */
+/*   Updated: 2023/07/07 18:22:03 by yumamur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,5 @@ void	ft_putmem_fd(int fd, const void *mem, size_t n, t_c_char *sep)
 		if (sep && i < n)
 			write(fd, sep, ft_strlen(sep));
 	}
-	// write(fd, "\n", 1);
+	write(fd, "\n", 1);
 }

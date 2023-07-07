@@ -6,12 +6,11 @@
 /*   By: yumamur <yumamur@student.42istanbul.com.t  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 15:47:27 by yumamur           #+#    #+#             */
-/*   Updated: 2023/07/06 16:47:23 by yumamur          ###   ########.fr       */
+/*   Updated: 2023/07/07 18:46:39 by yumamur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/stackft.h"
-#include "../../include/internal/stack_utils.h"
 
 int	ft_stack_push(t_stack *st, void *val)
 {
@@ -28,7 +27,7 @@ int	ft_stack_push(t_stack *st, void *val)
 		else
 			return (-1);
 	}
-	_stack_setsize(st, st->size + 1);
-	ft_memcpy((char *)&((st->data)[st->index]), val, st->_type);
+	_call_internal(ST_SETSIZE, st, st->size + 1);
+	ft_memcpy(&st->u_data.v[st->index], val, st->_type);
 	return (0);
 }

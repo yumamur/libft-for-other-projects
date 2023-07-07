@@ -6,29 +6,28 @@
 /*   By: yumamur <yumamur@student.42istanbul.com.t  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 15:47:08 by yumamur           #+#    #+#             */
-/*   Updated: 2023/05/14 15:47:13 by yumamur          ###   ########.fr       */
+/*   Updated: 2023/07/07 18:45:42 by yumamur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "stackft.h"
-#include "internal/stack_utils.h"
 
 int	ft_stack_init(t_stack *stack, t_uint cap, t_ulong _type)
 {
 	if (!stack || !cap || !_type)
 	{
-		if (stack->data)
-			free((void *)stack->data);
+		if (stack->u_data.c)
+			free(stack->u_data.v);
 		else
-			stack->data = NULL;
+			stack->u_data.v = NULL;
 		return (-1);
 	}
-	_stack_settype(stack, _type);
-	_stack_setcap(stack, cap);
-	_stack_setsize(stack, 0);
-	stack->data = malloc(cap * stack->_type);
-	if (!stack->data)
+	_call_internal(ST_SETTYPE, stack, _type);
+	_call_internal(ST_SETCAP, stack, cap);
+	_call_internal(ST_SETSIZE, stack, 0);
+	stack->u_data.v = malloc(cap * stack->_type);
+	if (!stack->u_data.v)
 		return (-1);
-	ft_bzero((void *)stack->data, cap * stack->_type);
+	ft_bzero((void *)stack->u_data.v, cap * stack->_type);
 	return (0);
 }

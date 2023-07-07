@@ -6,34 +6,24 @@
 /*   By: yumamur <yumamur@student.42istanbul.com.t  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 13:42:13 by yumamur           #+#    #+#             */
-/*   Updated: 2023/06/17 20:05:15 by yumamur          ###   ########.fr       */
+/*   Updated: 2023/07/07 18:47:52 by yumamur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include <stdarg.h>
+
 #include "stackft.h"
 #include "internal/stack_utils.h"
 
-int	_call_internal(void (*f)(), t_stack *st, ...)
+int	_call_internal(int mode, t_stack *stack, t_ulong var)
 {
-	va_list	args;
-
-	if (!f)
-		return (0);
-	if ((int (*)(t_stack *, t_uint))f == _stack_setcap
-		|| ((int (*)(t_stack *, t_uint))f == _stack_setsize))
-	{
-		va_start(args, st);
-		f(st, va_arg(args, t_uint));
-		va_end(args);
-	}
-	else if ((int (*)(t_stack *, t_ulong))f == _stack_settype)
-	{
-		va_start(args, st);
-		f(st, va_arg(args, t_ulong));
-		va_end(args);
-	}
-	else if ((int (*)(t_stack *))f == _stack_delone
-			|| (int (*)(t_stack *))f == _update_index)
-		f(st);
-	return (1);
+	if (!mode || !stack)
+		return (-1);
+	if (mode == ST_DELONE)
+		return (_stack_delone(stack));
+	else if (mode == ST_SETSIZE)
+		return (_stack_setsize(stack, var));
+	else if (mode == ST_SETTYPE)
+		return (_stack_settype(stack, var));
+	else if (mode == ST_SETCAP)
+		return (_stack_setcap(stack, var));
+	return (-1);
 }

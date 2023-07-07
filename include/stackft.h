@@ -6,7 +6,7 @@
 /*   By: yumamur <yumamur@student.42istanbul.com.t  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 15:21:42 by yumamur           #+#    #+#             */
-/*   Updated: 2023/06/16 22:21:51 by yumamur          ###   ########.fr       */
+/*   Updated: 2023/07/07 18:42:07 by yumamur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # ifndef _STRUCT_STACK
 #  define _STRUCT_STACK
 
-/*	Define TYPE_SIZE macro BEFORE including stackft.h
+/*	Define TYPE_SIZE macro BEFORE creating libft.a
  */
 #  define _TYPE_SIZE_MAX 128
 #  ifndef MAX_TYPE_SIZE
@@ -31,7 +31,18 @@
 
 typedef struct s_stack
 {
-	void		*data;
+	union
+	{
+		void		*v;
+		t_c_char	*c;
+		t_c_uchar	*uc;
+		t_c_short	*s;
+		t_c_ushort	*us;
+		t_c_int		*i;
+		t_c_uint	*ui;
+		t_c_long	*l;
+		t_c_ulong	*ul;
+	}	u_data;
 	t_c_uint	size;
 	t_c_uint	cap;
 	t_c_ulong	index;
@@ -58,5 +69,12 @@ int		ft_stack_shift_nup(t_stack *stack, t_uint n);
 int		ft_stack_swap(t_stack *stack, t_uint i1, t_uint i2);
 int		ft_stack_xpanda(t_stack *stack, t_uint n);
 int		ft_stack_valid(t_stack *stack, char mode);
+
+# define ST_DELONE 1
+# define ST_SETTYPE 2
+# define ST_SETCAP 3
+# define ST_SETSIZE 4
+
+int		_call_internal(int mode, t_stack *st, t_ulong var);
 
 #endif /* STACKFT_H */

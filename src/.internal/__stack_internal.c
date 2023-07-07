@@ -6,13 +6,13 @@
 /*   By: yumamur <yumamur@student.42istanbul.com.t  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 15:22:35 by yumamur           #+#    #+#             */
-/*   Updated: 2023/05/14 15:23:27 by yumamur          ###   ########.fr       */
+/*   Updated: 2023/07/07 18:38:15 by yumamur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "internal/stack_utils.h"
 
-int	_update_index(t_stack *pt_stack)
+static int	_update_index(t_stack *pt_stack)
 {
 	t_ulong	*pt;
 
@@ -34,7 +34,7 @@ int	_stack_delone(t_stack *pt_stack)
 	if (!pt_stack)
 		return (-1);
 	datasize = pt_stack->_type;
-	pt = (char *)&(pt_stack->data[pt_stack->index]);
+	pt = &((char *)pt_stack->u_data.c)[pt_stack->index];
 	while (datasize)
 		pt[--datasize] = 0;
 	if (_stack_setsize(pt_stack, pt_stack->size - 1))
