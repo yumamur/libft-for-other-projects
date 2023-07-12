@@ -18,7 +18,7 @@ int	ft_stack_shift_nup(t_stack *stack, t_uint n)
 	void	*i;
 	t_uint	ct;
 
-	if (!n || !ft_stack_valid(stack, 1))
+	if (!n || ft_stack_valid(stack, 1))
 		return (-1);
 	while (n--)
 	{
@@ -41,7 +41,7 @@ int	ft_stack_shift_ndown(t_stack *stack, t_uint n)
 	void	*i;
 	t_uint	ct;
 
-	if (!n || !ft_stack_valid(stack, 1))
+	if (!n || ft_stack_valid(stack, 1))
 		return (-1);
 	while (n--)
 	{

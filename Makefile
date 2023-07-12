@@ -91,11 +91,11 @@ $(NAME): $(OBJ) | $(NAME_UPDATE_FLAG)
 
 $(OBJ): $(SRC) | $(OBJ_DIRS_FLAG)
 	@if [ -e $(NAME) ] && [ $(NAME_UPDATE_FLAG) -nt $(NAME) ]; then \
-		for c in $(SRC); do \
-			if [ "$$c" -ot "$(NAME)" ]; then \
+		for f in $(SRC); do \
+			if [ "$$f" -ot "$(NAME)" ]; then \
 				continue; \
 			else \
-				printf "$(TITLE) There is an update in $(FG_YELLOW)$$c$(CL_END), rebuilding.\n"; \
+				printf "$(TITLE) There is an update in $(FG_YELLOW)$$f$(CL_END), rebuilding.\n"; \
 				touch .rebuild; \
 				make --silent re; \
 				break; \
