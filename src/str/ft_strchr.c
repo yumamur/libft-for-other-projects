@@ -19,14 +19,18 @@ char	*ft_strchr(t_c_char *s, int c)
 
 	index = 0;
 	pt = (t_uchar *)s;
+	if ((char) c == '\0')
+	{
+		while (*pt)
+			++pt;
+		return ((char *)pt);
+	}
 	while (pt[index] != '\0')
 	{
 		if ((char) c == pt[index])
 			return ((char *)pt + index);
 		index++;
 	}
-	if ((char) c == '\0')
-		return ((char *)pt + index);
 	return (NULL);
 }
 

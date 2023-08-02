@@ -14,8 +14,11 @@
 
 char	*ft_file_name(char *path)
 {
-	char	*tmp;
+	char	*ret;
 
-	tmp = ft_strdup(ft_strrchr(path, '/') + 1);
-	return (tmp);
+	if (ft_strrchr(path, '/'))
+		ret = ft_strrchr(path, '/') + 1;
+	else
+		ret = path;
+	return (ret);
 }
