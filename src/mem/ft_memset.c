@@ -12,15 +12,15 @@
 
 #include "memft.h"
 
-void	*ft_memset(void *s, int c, size_t n)
+void	*ft_memset(void *mem, int set, size_t n)
 {
 	size_t	i;
 
 	i = 0;
 	while (i < n)
 	{
-		((t_uchar *)s)[i] = c;
+		((t_uchar *)mem)[i] = set;
 		i++;
 	}
-	return (s);
+	return (mem);
 }

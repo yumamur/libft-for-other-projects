@@ -13,6 +13,16 @@
 #ifndef TYPEFT_H
 # define TYPEFT_H
 
+typedef signed char				t_int8;
+typedef signed short			t_int16;
+typedef signed long int			t_int32;
+typedef signed long long int	t_int64;
+
+typedef unsigned char			t_uint8;
+typedef unsigned short			t_uint16;
+typedef unsigned long int		t_uint32;
+typedef unsigned long long int	t_uint64;
+
 typedef unsigned char		t_uchar;
 typedef unsigned short		t_ushort;
 typedef unsigned int		t_uint;

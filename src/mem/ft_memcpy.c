@@ -12,44 +12,44 @@
 
 #include "memft.h"
 
-void	*ft_memcpy(void *dest, t_c_void *src, size_t n)
+void	*ft_memcpy(void *dst, t_c_void *src, size_t n)
 {
 	size_t		i;
-	t_c_uchar	*ps;
-	t_uchar		*pd;
+	t_c_uchar	*ptr_s;
+	t_uchar		*ptr_d;
 
-	if (dest == NULL && src == NULL)
+	if (dst == NULL && src == NULL)
 		return (NULL);
-	if (dest == src)
-		return (dest);
-	ps = (t_c_uchar *)src;
-	pd = (t_uchar *)dest;
+	if (dst == src)
+		return (dst);
+	ptr_s = (t_c_uchar *)src;
+	ptr_d = (t_uchar *)dst;
 	i = 0;
 	while (n--)
 	{
-		pd[i] = ps[i];
+		ptr_d[i] = ptr_s[i];
 		i++;
 	}
-	return (dest);
+	return (dst);
 }
 
-void	*ft_memcpy_rev(void *dest, t_c_void *src, size_t n)
+void	*ft_memcpy_rev(void *dst, t_c_void *src, size_t n)
 {
 	size_t		i;
-	t_c_uchar	*ps;
-	t_uchar		*pd;
+	t_c_uchar	*ptr_s;
+	t_uchar		*ptr_d;
 
-	if (dest == NULL && src == NULL)
+	if (dst == NULL && src == NULL)
 		return (NULL);
-	if (dest == src)
-		return (dest);
-	ps = (t_c_uchar *)src;
-	pd = (t_uchar *)dest;
+	if (dst == src)
+		return (dst);
+	ptr_s = (t_c_uchar *)src;
+	ptr_d = (t_uchar *)dst;
 	i = 0;
 	while (n--)
 	{
-		pd[n] = ps[i];
+		ptr_d[n] = ptr_s[i];
 		i++;
 	}
-	return (dest);
+	return (dst);
 }

@@ -12,19 +12,19 @@
 
 #include "memft.h"
 
-void	*ft_memmove(void *dest, t_c_void *src, size_t n)
+void	*ft_memmove(void *dst, t_c_void *src, size_t n)
 {
-	t_uchar	*ps;
-	t_uchar	*pd;
+	t_uchar	*ptr_s;
+	t_uchar	*ptr_d;
 
-	if (!dest && !src)
+	if (!dst && !src)
 		return (NULL);
-	ps = (t_uchar *)src;
-	pd = (t_uchar *)dest;
-	if (ps < pd)
+	ptr_s = (t_uchar *)src;
+	ptr_d = (t_uchar *)dest;
+	if (ptr_s < ptr_d)
 		while (n--)
-			*(pd + n) = *(ps + n);
+			*(ptr_d + n) = *(ptr_s + n);
 	else
-		ft_memcpy(pd, ps, n);
-	return (dest);
+		ft_memcpy(ptr_d, ptr_s, n);
+	return (dst);
 }
