@@ -58,7 +58,7 @@ typedef struct s_pop
 # endif /* _STRUCT_STACK */
 
 int		ft_stack_clear(t_stack *stack);
-int		ft_stack_destroy(t_stack **stack);
+int		ft_stack_destroy(t_stack *stack);
 int		ft_stack_exch_bottom(t_stack *st1, t_stack *st2);
 int		ft_stack_exch_top(t_stack *st1, t_stack *st2);
 int		ft_stack_init(t_stack *st, t_uint cap, t_ulong _type);

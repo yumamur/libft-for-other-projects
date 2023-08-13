@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/stackft.h"
+#include "stackft.h"
 
 int	ft_stack_push(t_stack *st, void *val)
 {

@@ -10,14 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "stackft.h"
+#include "../../include/stackft.h"
 
-int	ft_stack_destroy(t_stack **stack)
+int	ft_stack_destroy(t_stack *stack)
 {
-	if (!stack || !*stack)
+	if (!stack)
 		return (-1);
-	if ((*stack)->u_data.v)
-		free((void *)(*stack)->u_data.v);
-	free(*stack);
+	if (stack->u_data.v)
+		free(stack->u_data.v);
 	return (0);
 }
