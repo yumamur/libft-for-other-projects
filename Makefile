@@ -44,17 +44,6 @@ OBJ_DIRS_FLAG		=	.obj_dirs_created
 NAME_UPDATE_FLAG	= 	.name_is_up_to_date
 
 
-#################
-##             ##
-#   STACK_VIS   #
-##             ##
-#################
-
-STACK_VIS = test_stack 
-DIR_STACK_VIS = ./stackvisualizer
-SRC_STACK_VIS = $(wildcard $(DIR_STACK_VIS)/*.c)
-
-
 #############
 ##         ##
 #   FILES   #
@@ -127,18 +116,9 @@ $(STACK_VIS): $(SRC_STACK_VIS) | $(NAME)
 all: $(NAME)
 
 clean:
-	@$(RM) $(DIR_OBJ) $(STACK_VIS)
+	@$(RM) $(DIR_OBJ)
 
 fclean: clean
-	@$(RM) $(NAME) $(OBJ_DIRS_FLAG) $(NAME_UPDATE_FLAG) $(STACK_VIS)
+	@$(RM) $(NAME) $(OBJ_DIRS_FLAG) $(NAME_UPDATE_FLAG)
 
 re: fclean all
-
-visstack: $(STACK_VIS) | $(NAME)
-	@if [ -e $(STACK_VIS) ]; then \
-		$(CC) $(CFLAGS) $(INCLUDE) $(SRC_STACK_VIS) $(NAME) -o $(STACK_VIS); \
-	else \
-		printf "$(TITLE) Building the $(FG_YELLOW)$(BOLD)$(STACK_VIS)$(CL_END) executable.\n"; \
-		$(CC) $(CFLAGS) $(INCLUDE) $(SRC_STACK_VIS) $(NAME) -o $(STACK_VIS); \
-		printf "$(TITLE) Done.\n"; \
-	fi
