@@ -16,6 +16,5 @@ void	ft_putstr(char *str)
 {
 	if (str == NULL)
 		return ;
-	while (*str != '\0')
-		write (1, &*str++, 1);
+	write (1, str, ft_strlen(str));
 }

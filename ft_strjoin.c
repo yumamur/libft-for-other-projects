@@ -22,13 +22,13 @@ char	*ft_strjoin(const char *s1, const char *s2)
 		return (NULL);
 	l1 = ft_strlen(s1);
 	l2 = ft_strlen(s2);
-	r = (char *)malloc((l1 + l2 + 1) * sizeof(*s1));
+	r = malloc((l1 + l2 + 1));
 	if (!r)
 		return (NULL);
-	while (*s1 != '\0')
-		*(r++) = *((char *)s1++);
-	while (*s2 != '\0')
-		*(r++) = *((char *)s2++);
+	while (*s1)
+		*(r++) = *(s1++);
+	while (*s2)
+		*(r++) = *(s2++);
 	*r = '\0';
 	return (r - l1 - l2);
 }

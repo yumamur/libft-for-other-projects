@@ -12,44 +12,26 @@
 
 #include "libft.h" 
 
-static size_t	ft_zerosaver(int n)
-{
-	while (n != 0)
-		return (1 + ft_zerosaver(n / 10));
-	return (0);
-}
-
-static size_t	ft_digitcount(int n)
-{
-	if (n == 0)
-		return (1);
-	else
-		return (ft_zerosaver(n));
-}
-
 char	*ft_itoa(int n)
 {
-	char	*pt;
-	size_t	d;
-	long	x;
+	char	ret[15];
 
-	x = n;
-	d = ft_digitcount(x);
-	if (n < 0)
-		d += 1;
-	pt = (char *)malloc((d + 1) * sizeof(char));
-	if (!pt)
-		return (NULL);
-	if (n < 0)
-		x *= -1;
-	pt[d] = '\0';
-	while (d > 0)
+	if (n == 0)
+		return (ft_strdup("0"));
+	ret[14] = 0;
+	*(int *)&ret[10] = n;
+	while (*(int *)&ret[10] && ++ret[14])
+		*(int *)&ret[10] /= 10;
+	*(int *)&ret[10] = n;
+	if (n < 0 && ++ret[14])
+		*(int *)&ret[10] *= -1;
+	*(ret + ret[14]) = '\0';
+	while (ret[14]-- > 0)
 	{
-		d--;
-		pt[d] = 48 + (x % 10);
-		x /= 10;
+		*(ret + ret[14]) = 48 + (*(int *)&ret[10] % 10);
+		*(int *)&ret[10] /= 10;
 	}
 	if (n < 0)
-		pt[0] = '-';
-	return (pt);
+		ret[0] = '-';
+	return (ft_strdup(ret));
 }

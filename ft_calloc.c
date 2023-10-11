@@ -10,15 +10,18 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <stdlib.h>
 
 void	*ft_calloc(size_t count, size_t size)
 {
 	void		*pt;
+	size_t		i;
 
 	pt = malloc(count * size);
 	if (!pt)
 		return (NULL);
-	ft_bzero(pt, (count * size));
+	i = 0;
+	while (i < count * size)
+		*((unsigned char *)pt + i++) = 0;
 	return (pt);
 }

@@ -25,8 +25,8 @@ static int	ft_ifexist(const char c, const char *ctrl)
 
 char	*ft_strtrim(const char *s1, const char *set)
 {
-	long unsigned int	size;
-	char				*pt;
+	unsigned long	size;
+	char			*pt;
 
 	if (!s1)
 		return (NULL);

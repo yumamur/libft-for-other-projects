@@ -2,9 +2,9 @@ NAME = libft.a
 
 CFLAGS	= -Wall -Werror -Wextra
 
-CC	= gcc
+CC	= clang
 
-SRCS    = ft_atoi.c \
+SRCS  = ft_atoi.c \
 		ft_bzero.c \
 		ft_calloc.c \
 		ft_isalnum.c \
@@ -41,7 +41,7 @@ SRCS    = ft_atoi.c \
 		ft_tolower.c \
 		ft_toupper.c
 
-BSRCS	= ft_lstdelone_bonus.c \
+BSRCS = ft_lstdelone_bonus.c \
 		ft_lstmap_bonus.c \
 		ft_lstclear_bonus.c \
 		ft_lstlast_bonus.c \
@@ -55,8 +55,9 @@ OBJS 	= $(SRCS:%.c=%.o)
 BOBJS	= $(BSRCS:%.c=%.o)
 
 all:	$(NAME)
+
 $(NAME):	$(OBJS)
-	ar -rcs $(NAME) $(OBJS)
+	@ar -rcs $(NAME) $(OBJS)
 	@echo "⠀⠀⠀⠀⠀⠀⠀⠀⠊⠀⠉⠁⠀⠀⠈⠉⠉⠉⠓⠂⢤⣄⡀⠀⠀⠀⠀⠀⠀⠀⠐⠚⠙⠲⣤⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀"
 	@echo "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡠⠄⠀⠀⠀⠤⢄⠀⠀⠀⠙⠀⠢⡐⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠓⠦⡤⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀"
 	@echo "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠳⢦⣻⣀⣀⣀⡤⠤⠤⠤⠤⠤⢄⠀⠀⠀⢹⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀"
@@ -82,14 +83,18 @@ $(NAME):	$(OBJS)
 	@echo "⢷⣤⣄⠀⠀⠲⠿⣤⣀⣀⣀⣀⢀⢀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣠⣶⡿⣿⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀"
 	@echo "⠀⠀⠉⠻⣦⣀⣀⠀⠈⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⣉⣡⡶⠟⠁⠀⢿⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀"
 	@echo "⣤⣤⣤⣤⣤⣭⣽⣿⣿⣿⣿⣿⣿⣷⣶⣶⣶⣶⣶⣶⣶⣾⣿⣿⣯⣥⣤⣶⣤⣤⣼⣗⣒⣒⣶⣦⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀ "
+
+%.o: %.c
+	@$(CC) $(CFLAGS) -c $< -o $@
+
 bonus: $(OBJS) $(BOBJS)
-	ar -rcs $(NAME) $(OBJS) $(BOBJS)
+	@ar -rcs $(NAME) $(OBJS) $(BOBJS)
 
 clean:
-	rm -rf $(OBJS) $(BOBJS)
+	@rm -rf $(OBJS) $(BOBJS)
 
 fclean: clean
-	rm -f $(NAME)
+	@rm -f $(NAME)
 
 re:	fclean all
 
