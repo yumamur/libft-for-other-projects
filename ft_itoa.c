@@ -14,22 +14,24 @@
 
 char	*ft_itoa(int n)
 {
-	char	ret[15];
+	char	ret[16];
 
 	if (n == 0)
 		return (ft_strdup("0"));
-	ret[14] = 0;
-	*(int *)&ret[10] = n;
-	while (*(int *)&ret[10] && ++ret[14])
-		*(int *)&ret[10] /= 10;
-	*(int *)&ret[10] = n;
-	if (n < 0 && ++ret[14])
-		*(int *)&ret[10] *= -1;
-	*(ret + ret[14]) = '\0';
-	while (ret[14]-- > 0)
+	if (n == -2147483648)
+		return (ft_strdup("-2147483648"));
+	ret[15] = 0;
+	*(int *)&ret[11] = n;
+	while (*(int *)&ret[11] && ++ret[15])
+		*(int *)&ret[11] /= 10;
+	*(int *)&ret[11] = n;
+	if (n < 0 && ++ret[15])
+		*(int *)&ret[11] *= -1;
+	*(ret + ret[15]) = 0;
+	while (ret[15]-- > 0)
 	{
-		*(ret + ret[14]) = 48 + (*(int *)&ret[10] % 10);
-		*(int *)&ret[10] /= 10;
+		*(ret + ret[15]) = 48 + (*(int *)&ret[11] % 10);
+		*(int *)&ret[11] /= 10;
 	}
 	if (n < 0)
 		ret[0] = '-';

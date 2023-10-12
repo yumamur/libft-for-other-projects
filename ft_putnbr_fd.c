@@ -14,24 +14,23 @@
 
 void	ft_putnbr_fd(int n, int fd)
 {
-	char	arr[11];
-	char	d;
-	char	sign;
+	char	arr[14];
 
-	d = 0;
 	if (!n)
 		return (ft_putstr_fd("0", fd));
-	if (n < 0)
-		sign = -1;
-	else
-		sign = 0;
+	if (n == -2147483648)
+		return (ft_putstr_fd("-2147483648", fd));
+	arr[13] = 0;
+	if (n < 0 && ++arr[13])
+		n *= -1;
+	arr[12] = 0;
 	while (n)
 	{
-		arr[11 - d] = 48 + n % 10;
-		n %= 10;
-		++d;
+		arr[10 - arr[12]++] = 48 + (n % 10);
+		n /= 10;
 	}
-	if (sign)
-		arr[11 - d] = '-';
-	ft_putstr_fd(arr + d, fd);
+	if (arr[13])
+		arr[10 - arr[12]++] = '-';
+	arr[11] = 0;
+	ft_putstr_fd(arr + 11 - arr[12], fd);
 }
